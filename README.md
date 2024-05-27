@@ -70,7 +70,35 @@ flowchart TB
   T2 --> R4
 ```
 
+#### Table of Contents <!-- omit from toc -->
+
+- [Description of Files in This Template Repo](#description-of-files-in-this-template-repo)
+  - [Community Health](#community-health)
+  - [Other Files](#other-files)
+
 ## Description of Files in This Template Repo
+
+GitHub allows some community health files
+to only reside in the .github repo
+and automatically appear in all other repos.
+However, we can't take full advantage of that feature
+because most files need repo-specific customization.
+
+### [Community Health][ghComHealth]
+
+| File                                 | Exists only in</br>.github repo | Overridden in<br/>template repo | Notes                    |
+| :----------------------------------- | :-----------------------------: | :-----------------------------: | :----------------------- |
+| 📁[.github/][githubFolder]           |                                 |                                 |                          |
+| &nbsp;├─📄[CODEOWNERS][codeOwnFile]  |               N/A               |               ✅                |                          |
+| &nbsp;└─📄[FUNDING.yml][fundingFile] |               ✅                |                                 |                          |
+| 📄[CODE_OF_CONDUCT.md][cocFile]      |                                 |               ✅                | Linked to by other files |
+| 📄[CONTRIBUTING.md][contribFile]     |                                 |               ✅                | Links to other files     |
+| 📄GOVERNANCE.md                      |                —                |                —                | Not implemented          |
+| 📄[LICENSE][licenseFile]             |               N/A               |               ✅                |                          |
+| 📄[SECURITY.md][securityFile]        |                                 |               ✅                | Links to GitHub repo     |
+| 📄[SUPPORT.md][supportFile]          |                                 |               ✅                | Links to other files     |
+
+### Other Files
 
 | File                                  | Description                                      |
 | :------------------------------------ | :----------------------------------------------- |
@@ -83,6 +111,9 @@ flowchart TB
 
 <!-- Source Code URIs (alphabetical by file hierarchy) -->
 
+[githubFolder]: ./.github/
+[codeOwnFile]: ./.github/CODEOWNERS
+[fundingFile]: ./.github/FUNDING.yml
 [vsCodeFolder]: ./.vscode/
 [docsFolder]: ./docs/
 [styleguideFile]: ./docs/Styleguide.md
@@ -91,6 +122,11 @@ flowchart TB
 [gitAttributesFile]: ./.gitattributes
 [gitIgnoreFile]: ./.gitignore
 [gitMessageFile]: ./.gitmessage
+[cocFile]: ./CODE_OF_CONDUCT.md
+[contribFile]: ./CONTRIBUTING.md
+[licenseFile]: ./LICENSE
+[securityFile]: ./SECURITY.md
+[supportFile]: ./SUPPORT.md
 
 <!-- GitHub Repo URIs (alphabetical by name) -->
 
