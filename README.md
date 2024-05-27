@@ -74,11 +74,12 @@ flowchart TB
 
 - [Description of Files in This Template Repo](#description-of-files-in-this-template-repo)
   - [Community Health](#community-health)
+  - [GitHub Configuration](#github-configuration)
   - [Other Files](#other-files)
 
 ## Description of Files in This Template Repo
 
-GitHub allows some community health files
+GitHub allows some community health and GitHub configuration files
 to only reside in the .github repo
 and automatically appear in all other repos.
 However, we can't take full advantage of that feature
@@ -98,6 +99,16 @@ because most files need repo-specific customization.
 | 📄[SECURITY.md][securityFile]        |                                 |               ✅                | Links to GitHub repo     |
 | 📄[SUPPORT.md][supportFile]          |                                 |               ✅                | Links to other files     |
 
+### [GitHub Configuration][ghTemplates]
+
+| Template                                                          | Exists only in</br>.github repo | Overridden in<br/>template repo | Description                                     |
+| :---------------------------------------------------------------- | :-----------------------------: | :-----------------------------: | :---------------------------------------------- |
+| 📁[.github/][githubFolder]                                        |                                 |                                 |                                                 |
+| &nbsp;├─📁DISCUSSION_TEMPLATE/                                    |                —                |                —                | Not implemented                                 |
+| &nbsp;├─📁[ISSUE_TEMPLATE/][issueFormsFolder]                     |                                 |               ✅                | Contains [GitHub Issue forms][ghIssueForms]     |
+| &nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└─📄[config.yml][issueChooserFile] |               ✅                |                                 | [GitHub Issue template chooser][ghIssueChooser] |
+| &nbsp;└─📄[pull_request_template.md][prTemplateFile]              |                                 |               ✅                | [GitHub Pull Request template][ghPRTemplate]    |
+
 ### Other Files
 
 | File                                  | Description                                      |
@@ -112,8 +123,11 @@ because most files need repo-specific customization.
 <!-- Source Code URIs (alphabetical by file hierarchy) -->
 
 [githubFolder]: ./.github/
+[issueFormsFolder]: ./.github/ISSUE_TEMPLATE/
+[issueChooserFile]: ./.github/ISSUE_TEMPLATE/config.yml
 [codeOwnFile]: ./.github/CODEOWNERS
 [fundingFile]: ./.github/FUNDING.yml
+[prTemplateFile]: ./.github/pull_request_template.md
 [vsCodeFolder]: ./.vscode/
 [docsFolder]: ./docs/
 [styleguideFile]: ./docs/Styleguide.md
@@ -137,5 +151,8 @@ because most files need repo-specific customization.
 
 [freeCodeCamp]: https://www.freecodecamp.org/news/how-to-use-the-dot-github-repository
 [ghComHealth]: https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file
+[ghIssueChooser]: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository#configuring-the-template-chooser
+[ghIssueForms]: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/manually-creating-a-single-issue-template-for-your-repositoryhttps://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-issue-forms
+[ghPRTemplate]: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/creating-a-pull-request-template-for-your-repository
 [ghTemplates]: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository
 [ghWorkflows]: https://docs.github.com/en/actions/how-tos/writing-workflows
