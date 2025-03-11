@@ -107,6 +107,8 @@ because most files need repo-specific customization.
 | &nbsp;├─📁DISCUSSION_TEMPLATE/                                    |                —                |                —                | Not implemented                                 |
 | &nbsp;├─📁[ISSUE_TEMPLATE/][issueFormsFolder]                     |                                 |               ✅                | Contains [GitHub Issue forms][ghIssueForms]     |
 | &nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└─📄[config.yml][issueChooserFile] |               ✅                |                                 | [GitHub Issue template chooser][ghIssueChooser] |
+| &nbsp;├─📄[copilot-instructions.md][copilotFile]                  |               N/A               |               ✅                | [Copilot configuration][ghCopilot]              |
+| &nbsp;├─📄[dependabot.yml][dependabotFile]                        |               N/A               |               ✅                | [Dependabot configuration][ghDependabot]        |
 | &nbsp;└─📄[pull_request_template.md][prTemplateFile]              |                                 |               ✅                | [GitHub Pull Request template][ghPRTemplate]    |
 
 ### Other Files
@@ -126,6 +128,8 @@ because most files need repo-specific customization.
 [issueFormsFolder]: ./.github/ISSUE_TEMPLATE/
 [issueChooserFile]: ./.github/ISSUE_TEMPLATE/config.yml
 [codeOwnFile]: ./.github/CODEOWNERS
+[copilotFile]: ./.github/copilot-instructions.md
+[dependabotFile]: ./.github/dependabot.yml
 [fundingFile]: ./.github/FUNDING.yml
 [prTemplateFile]: ./.github/pull_request_template.md
 [vsCodeFolder]: ./.vscode/
@@ -151,6 +155,8 @@ because most files need repo-specific customization.
 
 [freeCodeCamp]: https://www.freecodecamp.org/news/how-to-use-the-dot-github-repository
 [ghComHealth]: https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file
+[ghCopilot]: https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot
+[ghDependabot]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference
 [ghIssueChooser]: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository#configuring-the-template-chooser
 [ghIssueForms]: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/manually-creating-a-single-issue-template-for-your-repositoryhttps://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-issue-forms
 [ghPRTemplate]: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/creating-a-pull-request-template-for-your-repository
