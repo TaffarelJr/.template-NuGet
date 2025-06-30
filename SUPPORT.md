@@ -40,6 +40,56 @@ Here are some tips:
 
 See [`CONTRIBUTING.md`][contrib] on how to contribute.
 
+## Supported Platforms
+
+This project aims to support a wide range of .NET platforms for compatibility.
+To this end, we support platforms that implement .NET Standard 2.0 or higher.
+However, we **highly recommend** using _only_ the platforms that are
+officially supported by Microsoft.
+
+- 🟢 = Fully supported.
+- 🟡 = Still works, but upgrading is highly recommended.
+- 🔴 = Not supported. _(security vulnerabilities, lack of tool support, etc.)_
+
+| Platform             | End of<br/>Microsoft Support | .NET Standard<br/>2.0 | .NET Standard<br/>2.1 |
+| :------------------- | ---------------------------: | :-------------------: | :-------------------: |
+| .NET 9 _(STS)_       |                 May 12, 2026 |          🟢           |          🟢           |
+| .NET 8 _(LTS)_       |            November 10, 2026 |          🟢           |          🟢           |
+| .NET 7 _(STS)_       |                 May 14, 2024 |          🟡           |          🟡           |
+| .NET 6 _(LTS)_       |            November 12, 2024 |          🟡           |          🟡           |
+| .NET 5 _(STS)_       |                 May 10, 2022 |          🟡           |          🟡           |
+| .NET Core 3.1        |            December 13, 2022 |          🟡           |          🟡           |
+| .NET Core 3.0        |                March 3, 2020 |          🔴           |          🔴           |
+| .NET Core 2.2        |            December 23, 2019 |          🔴           |           —           |
+| .NET Core 2.1        |              August 21, 2021 |          🔴           |           —           |
+| .NET Core 2.0        |              October 1, 2018 |          🔴           |           —           |
+| .NET Core 1.1        |                June 27, 2019 |           —           |           —           |
+| .NET Core 1.0        |                June 27, 2019 |           —           |           —           |
+| .NET Framework 4.8.1 |               _\<see note\>_ |          🟢           |           —           |
+| .NET Framework 4.8   |               _\<see note\>_ |          🟢           |           —           |
+| .NET Framework 4.7.2 |               _\<see note\>_ |          🟢           |           —           |
+| .NET Framework 4.7.1 |               _\<see note\>_ |          🟢           |           —           |
+| .NET Framework 4.7   |               _\<see note\>_ |          🟢           |           —           |
+| .NET Framework 4.6.2 |             January 12, 2027 |          🟢           |           —           |
+| .NET Framework 4.6.1 |                 Apr 26, 2022 |          🔴           |           —           |
+| .NET Framework 4.6   |                 Apr 26, 2022 |           —           |           —           |
+| .NET Framework 4.5.2 |                 Apr 26, 2022 |           —           |           —           |
+| .NET Framework 4.5.1 |                 Jan 12, 2016 |           —           |           —           |
+| .NET Framework 4.5   |                 Jan 12, 2016 |           —           |           —           |
+
+> [!NOTE]
+> .NET Framework 4.6.2 and later are supported as long as they're on a supported
+> Windows OS.
+
+More information about supported platforms can be found here:
+
+- [.NET Core & .NET][netCore] support policies
+- [.NET Standard][netStandard] implementation
+- [.NET Framework][netFramework] support policies
+- [Microsoft Product & Service Lifecycle information][winLifecycle] (search page)
+  - [Windows 10 Home and Pro][winHomePro] release support
+  - [Windows Server][winServer] release support
+
 ## Attribution
 
 This document was shamelessly stolen and modified
@@ -53,13 +103,19 @@ from the [Remark][remark] repo.
 
 <!-- GitHub Repo URIs -->
 
-[discussions]: https://github.com/TaffarelJr/.github/discussions
-[issues]: https://github.com/TaffarelJr/.github/issues
-[wiki]: https://github.com/TaffarelJr/.github/wiki
+[discussions]: https://github.com/TaffarelJr/.template-NuGet/discussions
+[issues]: https://github.com/TaffarelJr/.template-NuGet/issues
+[wiki]: https://github.com/TaffarelJr/.template-NuGet/wiki
 
 <!-- Public URIs -->
 
+[netCore]: https://dotnet.microsoft.com/platform/support/policy/dotnet-core
+[netFramework]: https://docs.microsoft.com/en-us/lifecycle/products/microsoft-net-framework
+[netStandard]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard
 [remark]: https://github.com/remarkjs/.github/blob/main/support.md
 [rubberduck]: https://rubberduckdebugging.com
 [sandbox]: https://codesandbox.io
+[winHomePro]: https://docs.microsoft.com/en-us/lifecycle/products/windows-10-home-and-pro
+[winLifecycle]: https://docs.microsoft.com/en-us/lifecycle/products
+[winServer]: https://docs.microsoft.com/en-us/lifecycle/products/windows-server
 [xy]: https://meta.stackexchange.com/questions/66377/what-is-the-xy-problem/66378#66378
