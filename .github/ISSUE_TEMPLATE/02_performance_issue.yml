@@ -7,7 +7,7 @@ body:
     attributes:
       value: >
         Thanks for helping us make our code faster! 🤗 See the
-        [`CONTRIBUTING.md`](https://github.com/TaffarelJr/.github/blob/main/CONTRIBUTING.md#how-do-i-submit-a-good-bug-report)
+        [`CONTRIBUTING.md`](https://github.com/TaffarelJr/.template-NuGet/blob/main/CONTRIBUTING.md#how-do-i-submit-a-good-bug-report)
         file for tips on writing an effective performance issue.
 
   - type: checkboxes
@@ -19,19 +19,19 @@ body:
       options:
         - label: >
             I've searched the
-            [Documentation](https://github.com/TaffarelJr/.github/tree/main/docs)
-            and [Wiki](https://github.com/TaffarelJr/.github/wiki)
+            [Documentation](https://github.com/TaffarelJr/.template-NuGet/tree/main/docs)
+            and [Wiki](https://github.com/TaffarelJr/.template-NuGet/wiki)
             for information on this topic,
             and I'm sure it's not performing the way it should.
           required: true
         - label: >
             I've searched and/or posted in the
-            [Discussions](https://github.com/TaffarelJr/.github/discussions)
+            [Discussions](https://github.com/TaffarelJr/.template-NuGet/discussions)
             about this problem.
           required: true
         - label: >
             I've searched the existing
-            [Issues](https://github.com/TaffarelJr/.github/issues)
+            [Issues](https://github.com/TaffarelJr/.template-NuGet/issues)
             and this problem has not been reported yet.
           required: true
 
