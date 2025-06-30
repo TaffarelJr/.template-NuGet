@@ -53,9 +53,9 @@ from the [Remark][remark] repo.
 
 <!-- GitHub Repo URIs -->
 
-[discussions]: https://github.com/TaffarelJr/.github/discussions
-[issues]: https://github.com/TaffarelJr/.github/issues
-[wiki]: https://github.com/TaffarelJr/.github/wiki
+[discussions]: https://github.com/TaffarelJr/.template-NuGet/discussions
+[issues]: https://github.com/TaffarelJr/.template-NuGet/issues
+[wiki]: https://github.com/TaffarelJr/.template-NuGet/wiki
 
 <!-- Public URIs -->
 

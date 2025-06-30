@@ -7,7 +7,7 @@ body:
     attributes:
       value: >
         Thanks for helping us add more value! 🤗 See the
-        [`CONTRIBUTING.md`](https://github.com/TaffarelJr/.github/blob/main/CONTRIBUTING.md#how-do-i-submit-a-good-enhancement-suggestion)
+        [`CONTRIBUTING.md`](https://github.com/TaffarelJr/.template-NuGet/blob/main/CONTRIBUTING.md#how-do-i-submit-a-good-enhancement-suggestion)
         file for tips on writing an effective enhancement suggestion.
 
   - type: checkboxes
@@ -19,14 +19,14 @@ body:
       options:
         - label: >
             I've searched the
-            [Documentation](https://github.com/TaffarelJr/.github/tree/main/docs)
-            and [Wiki](https://github.com/TaffarelJr/.github/wiki)
+            [Documentation](https://github.com/TaffarelJr/.template-NuGet/tree/main/docs)
+            and [Wiki](https://github.com/TaffarelJr/.template-NuGet/wiki)
             for information on this topic,
             and I'm sure it's not currently available.
           required: true
         - label: >
             I've searched and/or posted in the
-            [Discussions](https://github.com/TaffarelJr/.github/discussions)
+            [Discussions](https://github.com/TaffarelJr/.template-NuGet/discussions)
             about this enhancement.
           required: true
         - label: >
@@ -36,7 +36,7 @@ body:
           required: true
         - label: >
             I've searched the existing
-            [Issues](https://github.com/TaffarelJr/.github/issues)
+            [Issues](https://github.com/TaffarelJr/.template-NuGet/issues)
             and this enhancement has not been suggested yet.
           required: true
 
