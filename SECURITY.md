@@ -12,4 +12,4 @@ and may ask for additional information or guidance.
 
 <!-- GitHub Repo URIs -->
 
-[advisories]: https://github.com/TaffarelJr/.github/security/advisories
+[advisories]: https://github.com/TaffarelJr/.template-NuGet/security/advisories
