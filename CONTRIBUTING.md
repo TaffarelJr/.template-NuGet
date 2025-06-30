@@ -269,12 +269,12 @@ This guide is based on the [contributing.md][contrib] website.
 
 <!-- GitHub Repo URIs -->
 
-[discussions]: https://github.com/TaffarelJr/.github/discussions
-[issues]: https://github.com/TaffarelJr/.github/issues
-[newBug]: https://github.com/TaffarelJr/.github/issues/new?template=01_bug_report.yml
-[newFeature]: https://github.com/TaffarelJr/.github/issues/new?template=03_feature_request.yml
-[newIssue]: https://github.com/TaffarelJr/.github/issues/new?template=02_performance_issue.yml
-[wiki]: https://github.com/TaffarelJr/.github/wiki
+[discussions]: https://github.com/TaffarelJr/.template-NuGet/discussions
+[issues]: https://github.com/TaffarelJr/.template-NuGet/issues
+[newBug]: https://github.com/TaffarelJr/.template-NuGet/issues/new?template=01_bug_report.yml
+[newFeature]: https://github.com/TaffarelJr/.template-NuGet/issues/new?template=03_feature_request.yml
+[newIssue]: https://github.com/TaffarelJr/.template-NuGet/issues/new?template=02_performance_issue.yml
+[wiki]: https://github.com/TaffarelJr/.template-NuGet/wiki
 
 <!-- Public URIs -->
 
