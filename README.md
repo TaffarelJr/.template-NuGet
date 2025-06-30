@@ -88,30 +88,30 @@ because most files need repo-specific customization.
 
 ### [Community Health][ghComHealth]
 
-| File                                 | Exists only in</br>.github repo | Overridden in<br/>template repo | Notes                    |
-| :----------------------------------- | :-----------------------------: | :-----------------------------: | :----------------------- |
-| 📁[.github/][githubFolder]           |                                 |                                 |                          |
-| &nbsp;├─📄[CODEOWNERS][codeOwnFile]  |               N/A               |               ✅                |                          |
-| &nbsp;└─📄[FUNDING.yml][fundingFile] |               ✅                |                                 |                          |
-| 📄[CODE_OF_CONDUCT.md][cocFile]      |                                 |               ✅                | Linked to by other files |
-| 📄[CONTRIBUTING.md][contribFile]     |                                 |               ✅                | Links to other files     |
-| 📄GOVERNANCE.md                      |                —                |                —                | Not implemented          |
-| 📄[LICENSE][licenseFile]             |               N/A               |               ✅                |                          |
-| 📄[SECURITY.md][securityFile]        |                                 |               ✅                | Links to GitHub repo     |
-| 📄[SUPPORT.md][supportFile]          |                                 |               ✅                | Links to other files     |
+| File                                | Exists only in</br>.github repo | Overridden in<br/>template repo | Notes                    |
+| :---------------------------------- | :-----------------------------: | :-----------------------------: | :----------------------- |
+| 📁[.github/][githubFolder]          |                                 |                                 |                          |
+| &nbsp;├─📄[CODEOWNERS][codeOwnFile] |               N/A               |               ✅                |                          |
+| &nbsp;└─📄FUNDING.yml               |               ✅                |                                 |                          |
+| 📄[CODE_OF_CONDUCT.md][cocFile]     |                                 |               ✅                | Linked to by other files |
+| 📄[CONTRIBUTING.md][contribFile]    |                                 |               ✅                | Links to other files     |
+| 📄GOVERNANCE.md                     |                —                |                —                | Not implemented          |
+| 📄[LICENSE][licenseFile]            |               N/A               |               ✅                |                          |
+| 📄[SECURITY.md][securityFile]       |                                 |               ✅                | Links to GitHub repo     |
+| 📄[SUPPORT.md][supportFile]         |                                 |               ✅                | Links to other files     |
 
 ### [GitHub Configuration][ghTemplates]
 
-| Template                                                          | Exists only in</br>.github repo | Overridden in<br/>template repo | Description                                     |
-| :---------------------------------------------------------------- | :-----------------------------: | :-----------------------------: | :---------------------------------------------- |
-| 📁[.github/][githubFolder]                                        |                                 |                                 |                                                 |
-| &nbsp;├─📁DISCUSSION_TEMPLATE/                                    |                —                |                —                | Not implemented                                 |
-| &nbsp;├─📁[ISSUE_TEMPLATE/][issueFormsFolder]                     |                                 |               ✅                | Contains [GitHub Issue forms][ghIssueForms]     |
-| &nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└─📄[config.yml][issueChooserFile] |               ✅                |                                 | [GitHub Issue template chooser][ghIssueChooser] |
-| &nbsp;├─📄[copilot-instructions.md][copilotFile]                  |               N/A               |               ✅                | [Copilot configuration][ghCopilot]              |
-| &nbsp;├─📄[dependabot.yml][dependabotFile]                        |               N/A               |               ✅                | [Dependabot configuration][ghDependabot]        |
-| &nbsp;├─📄[pull_request_template.md][prTemplateFile]              |                                 |               ✅                | [GitHub Pull Request template][ghPRTemplate]    |
-| &nbsp;└─📄[settings.yml][settingsFile]                            |               N/A               |               ✅                | [Repo configuration][ghSettings]                |
+| Template                                             | Exists only in</br>.github repo | Overridden in<br/>template repo | Description                                     |
+| :--------------------------------------------------- | :-----------------------------: | :-----------------------------: | :---------------------------------------------- |
+| 📁[.github/][githubFolder]                           |                                 |                                 |                                                 |
+| &nbsp;├─📁DISCUSSION_TEMPLATE/                       |                —                |                —                | Not implemented                                 |
+| &nbsp;├─📁[ISSUE_TEMPLATE/][issueFormsFolder]        |                                 |               ✅                | Contains [GitHub Issue forms][ghIssueForms]     |
+| &nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└─📄config.yml        |               ✅                |                                 | [GitHub Issue template chooser][ghIssueChooser] |
+| &nbsp;├─📄[copilot-instructions.md][copilotFile]     |               N/A               |               ✅                | [Copilot configuration][ghCopilot]              |
+| &nbsp;├─📄[dependabot.yml][dependabotFile]           |               N/A               |               ✅                | [Dependabot configuration][ghDependabot]        |
+| &nbsp;├─📄[pull_request_template.md][prTemplateFile] |                                 |               ✅                | [GitHub Pull Request template][ghPRTemplate]    |
+| &nbsp;└─📄[settings.yml][settingsFile]               |               N/A               |               ✅                | [Repo configuration][ghSettings]                |
 
 ### [GitHub Workflows][ghWorkflows]
 
@@ -137,13 +137,11 @@ because most files need repo-specific customization.
 
 [githubFolder]: ./.github/
 [issueFormsFolder]: ./.github/ISSUE_TEMPLATE/
-[issueChooserFile]: ./.github/ISSUE_TEMPLATE/config.yml
 [workflowFolder]: ./.github/workflows/
 [syncWorkflow]: ./.github/workflows/template-sync.yml
 [codeOwnFile]: ./.github/CODEOWNERS
 [copilotFile]: ./.github/copilot-instructions.md
 [dependabotFile]: ./.github/dependabot.yml
-[fundingFile]: ./.github/FUNDING.yml
 [prTemplateFile]: ./.github/pull_request_template.md
 [settingsFile]: ./.github/settings.yml
 [vsCodeFolder]: ./.vscode/
