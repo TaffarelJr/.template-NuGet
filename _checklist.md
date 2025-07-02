@@ -1,7 +1,7 @@
-# Creating a New Template Repo <!-- omit in toc -->
+# Creating a New NuGet Package Repo <!-- omit in toc -->
 
-Template repos use the [.github][ghTemplate] repo as their base template.
-Follow these steps to create a new template repo derived from it.
+NuGet package repos use the [.template-nuget][ghTemplate] repo as their base template.
+Follow these steps to create a new repo derived from it.
 
 #### Table of Contents <!-- omit in toc -->
 
@@ -19,7 +19,6 @@ Follow these steps to create a new template repo derived from it.
 - DO NOT use a template in GitHub when creating the new repo;
   we'll use Git merge to get the necessary files instead
 - Always use kebab-case for the repo name
-  - Use the format: `.template-<type>`
 - Leave the description blank
 - Don't add any files to the new repo; leave it empty
 
@@ -52,14 +51,14 @@ The following must be configured manually:
 ## 3. Clone the new repo
 
 Clone the new repo locally and open it in Visual Studio Code.
-The .github repo needs to be added as an upstream remote
-so the template sync workflow can merge its commits into the new template repo.
+The .template-nuget repo needs to be added as an upstream remote
+so the template sync workflow can merge its commits into the new repo.
 Execute the following commands:
 
 ```bash
 # May need to configure SSH key before executing this
 git config remote.pushdefault origin
-git remote add template git@github.com:TaffarelJr/.github.git
+git remote add template git@github.com:TaffarelJr/.template-nuget.git
 git fetch template
 git checkout -B main template/main
 git config commit.template .gitmessage
@@ -67,21 +66,21 @@ git config commit.template .gitmessage
 
 ## 4. Customize template files
 
-Some files that were synced from the [.github][ghTemplate] repo
+Some files that were synced from the [.template-nuget][ghTemplate] repo
 need to be customized for the new repo:
 
 - Delete the following files that will
-  reside only in the [.github][ghTemplate] repo:
-  - ./.github/ISSUE_TEMPLATE/config.yml
-  - ./.github/FUNDING.yml
-  - Remove any mentions of them in [README.md][readmeFile] as well
-- Find all instances of `TaffarelJr/.github` in the template repo
-  - Replace with `TaffarelJr/<template repo name>` in **ONLY** these files:
+  reside only in the [.template-nuget][ghTemplate] repo:
+  - `_checklist.md`
+- Find all instances of `TaffarelJr/.template-nuget` in the new repo
+  - Replace with `TaffarelJr/<new repo name>` in **ONLY** these files:
     - [ISSUE_TEMPLATE/\*][issueFormsFolder]
     - [CONTRIBUTING.md][contribFile]
     - [SECURITY.md][securityFile]
     - [SUPPORT.md][supportFile]
-- Uncomment the cron schedule in the [Template Sync][syncFile] workflow
+- Find all instances of `TaffarelJr/.github` in the new repo
+  - Replace with `TaffarelJr/.template-nuget` in **ONLY** these files:
+    - [Template Sync][syncFile] workflow
 - Make any additional changes to the template files as necessary
 - Commit the changes, using the following commit message:
 
@@ -92,16 +91,16 @@ need to be customized for the new repo:
 ## 5. Customize root files
 
 Now add deeper customization to the root files
-to meet the needs of the new template repo:
+to meet the needs of the new repo:
 
 - Add any additional ecosystems to [dependabot.yml][dependabotFile]
-- Modify [\_checklist.md][checklistFile] as needed
+- Delete [\_checklist.md][checklistFile]
 - Modify [.editorconfig][editorConfigFile] as needed
 - Modify [.gitattributes][gitAttributesFile] as needed
   (using [scaffolding][ghGitAttributes])
 - Modify [.gitignore][gitIgnoreFile] as needed
   (using [scaffolding][ghGitIgnore])
-- Modify [README.md][readmeFile] as needed
+- Replace contents of [README.md][readmeFile]
 - Make any additional changes to the root files as necessary
 - Commit the changes, using the following commit message:
 
@@ -112,14 +111,14 @@ to meet the needs of the new template repo:
 ## 6. Customize repo settings
 
 Most settings in [settings.yml][settingsFile]
-are fine to be inherited from the [.github][ghTemplate] repo.
+are fine to be inherited from the [.template-nuget][ghTemplate] repo.
 Only a few need to be overridden in the new repo.
 
 - Replace the contents of the file with the following,
   filling in the values as indicated:
 
   ```yml
-  _extends: .github
+  _extends: .template-nuget
 
   repository:
     #─────────────────────────────────────────────────────────────────────────────
@@ -147,6 +146,15 @@ Only a few need to be overridden in the new repo.
 
     # The name of the repo
     name: <name>
+
+    # Whether the repo is available as a template
+    is_template: false
+
+    # Whether to allow merging pull requests with a merge commit
+    allow_merge_commit: true
+
+    # Whether to allow rebase-merging pull requests
+    allow_rebase_merge: false
   ```
 
 - Make any additional changes as needed

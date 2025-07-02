@@ -1,11 +1,7 @@
-# .github Repository <!-- omit from toc -->
+# NuGet Template Repository <!-- omit from toc -->
 
-This is a special base template repo that contains
-default [community health files][ghComHealth], [templates][ghTemplates],
-[workflows][ghWorkflows], and other files
-to be shared with derived repositories.
-For more information on how this special repo works,
-see this article on [freeCodeCamp][freeCodeCamp].
+This is a template repo that contains the default configuration
+for building and publishing a single NuGet package.
 
 ```mermaid
 ---
@@ -53,7 +49,7 @@ flowchart TB
   end
 
   classDef current fill:#E68A39,color:#000000
-  class gh current
+  class T1,T2 current
 
   classDef sub opacity:0
   class subGH,subT,subR sub
@@ -76,6 +72,7 @@ flowchart TB
   - [Community Health](#community-health)
   - [GitHub Configuration](#github-configuration)
   - [GitHub Workflows](#github-workflows)
+  - [.NET Configuration](#net-configuration)
   - [Other Files](#other-files)
 
 ## Description of Files in This Template Repo
@@ -121,6 +118,16 @@ because most files need repo-specific customization.
 | &nbsp;└─📁[workflows/][workflowFolder]                                      |                                                           |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─📄[Template Sync][syncWorkflow] | Synchronizes files from a template repo to a derived repo |
 
+### .NET Configuration
+
+| File                              | Description                       |
+| :-------------------------------- | :-------------------------------- |
+| 📁[.config/][configFolder]        | Contains `dotnet` tool settings   |
+| 📄[.vsconfig][vsConfigFile]       | Visual Studio settings            |
+| 📄[global.json][globalJsonFile]   | .NET SDK settings                 |
+| 📄[nuget.config][nugetConfigFile] | NuGet settings                    |
+| 📄[StyleCop.json][styleCopFile]   | StyleCop (code analysis) settings |
+
 ### Other Files
 
 | File                                  | Description                                      |
@@ -144,6 +151,7 @@ because most files need repo-specific customization.
 [dependabotFile]: ./.github/dependabot.yml
 [prTemplateFile]: ./.github/pull_request_template.md
 [settingsFile]: ./.github/settings.yml
+[configFolder]: ./.config/
 [vsCodeFolder]: ./.vscode/
 [docsFolder]: ./docs/
 [styleguideFile]: ./docs/Styleguide.md
@@ -153,10 +161,14 @@ because most files need repo-specific customization.
 [gitAttributesFile]: ./.gitattributes
 [gitIgnoreFile]: ./.gitignore
 [gitMessageFile]: ./.gitmessage
+[vsConfigFile]: ./.vsconfig
 [cocFile]: ./CODE_OF_CONDUCT.md
 [contribFile]: ./CONTRIBUTING.md
+[globalJsonFile]: ./global.json
 [licenseFile]: ./LICENSE
+[nugetConfigFile]: ./nuget.config
 [securityFile]: ./SECURITY.md
+[styleCopFile]: ./StyleCop.json
 [supportFile]: ./SUPPORT.md
 
 <!-- GitHub Repo URIs (alphabetical by name) -->
