@@ -23,7 +23,7 @@ jobs:
         run: dotnet test --collect:"XPlat Code Coverage" --settings test/Coverlet.runsettings --results-directory coverage
 
       - name: Generate coverage report
-        uses: danielpalme/ReportGenerator-GitHub-Action@5.2.4
+        uses: danielpalme/ReportGenerator-GitHub-Action@5.4.9
         with:
           reports: "coverage/**/coverage.opencover.xml"
           targetdir: "coveragereport"
