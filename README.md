@@ -1,11 +1,7 @@
-# `.github` Repository <!-- omit from toc -->
+# NuGet Template Repository <!-- omit from toc -->
 
-This is a special, base template repo that contains
-default [community health files][health], [templates][templates],
-[workflows][workflows], and any other files
-to be shared with derived repositories.
-For more information on how this special repo works,
-see this article on [freeCodeCamp][freeCodeCamp].
+This is a template repo that contains the default configuration
+for building and publishing a single NuGet package.
 
 ```mermaid
 ---
@@ -53,7 +49,7 @@ flowchart TB
   end
 
   classDef current fill:#E68A39,color:#000000
-  class gh current
+  class T1,T2 current
 
   classDef sub opacity:0
   class subGH,subT,subR sub
@@ -82,44 +78,43 @@ flowchart TB
 
 ### [Community Health Files][health]
 
-| File                           | Exists only</br>in this repo | Synced to<br/>(and overridden in)<br/>derived repos | Notes      |
-| :----------------------------- | :--------------------------: | :-------------------------------------------------: | :--------- |
-| 📄[`CODE_OF_CONDUCT.md`][coc]  |              ✅              |                                                     |            |
-| 📄[`CODEOWNERS`][codeOwners]   |                              |                         ✅                          |            |
-| 📄[`CONTRIBUTING.md`][contrib] |                              |                         ✅                          |            |
-| 📄[`FUNDING.yml`][funding]     |              ✅              |                                                     |            |
-| 📄`GOVERNANCE.md`              |              ─               |                          ─                          | Not needed |
-| 📄[`LICENSE`][license]         |                              |                         ✅                          |            |
-| 📄[`SECURITY.md`][security]    |                              |                         ✅                          |            |
-| 📄[`SUPPORT.md`][support]      |                              |                         ✅                          |            |
+| File                         | Exists only</br>in this repo | Synced to<br/>(and overridden in)<br/>derived repos | Notes      |
+| :--------------------------- | :--------------------------: | :-------------------------------------------------: | :--------- |
+| [`CODE_OF_CONDUCT.md`][coc]  |              ✅              |                                                     |            |
+| [`CODEOWNERS`][codeOwners]   |                              |                         ✅                          |            |
+| [`CONTRIBUTING.md`][contrib] |                              |                         ✅                          |            |
+| [`FUNDING.yml`][funding]     |              ✅              |                                                     |            |
+| `GOVERNANCE.md`              |                              |                                                     | Not needed |
+| [`LICENSE`][license]         |                              |                         ✅                          |            |
+| [`SECURITY.md`][security]    |                              |                         ✅                          |            |
+| [`SUPPORT.md`][support]      |                              |                         ✅                          |            |
 
 ### [GitHub Templates][templates]
 
-| Template                            | Exists only</br>in this repo | Synced to<br/>(and overridden in)<br/>derived repos | Notes               |
-| :---------------------------------- | :--------------------------: | :-------------------------------------------------: | :------------------ |
-| 📁Discussion category forms         |              ─               |                          ─                          | Not implemented yet |
-| 📁[Issue templates][issues]         |                              |                         ✅                          |                     |
-| 📄[Issue template chooser][chooser] |              ✅              |                                                     |                     |
-| 📄[Pull request template][prs]      |                              |                         ✅                          |                     |
+| Template                          | Exists only</br>in this repo | Synced to<br/>(and overridden in)<br/>derived repos | Notes               |
+| :-------------------------------- | :--------------------------: | :-------------------------------------------------: | :------------------ |
+| Discussion category forms         |                              |                                                     | Not implemented yet |
+| [Issue templates][issues]         |                              |                         ✅                          |                     |
+| [Issue template chooser][chooser] |              ✅              |                                                     |                     |
+| [Pull request template][prs]      |                              |                         ✅                          |                     |
 
 ### [GitHub Workflows][workflows]
 
-| Workflow                | Exists only</br>in this repo | Synced to<br/>(and overridden in)<br/>derived repos | Description                                                         |
-| :---------------------- | :--------------------------: | :-------------------------------------------------: | :------------------------------------------------------------------ |
-| 📄[Template Sync][sync] |                              |                         ✅                          | Synchronizes changes<br/>from a template repo<br/>to a derived repo |
+| Workflow              | Exists only</br>in this repo | Synced to<br/>(and overridden in)<br/>derived repos | Description                                                         |
+| :-------------------- | :--------------------------: | :-------------------------------------------------: | :------------------------------------------------------------------ |
+| [Template Sync][sync] |                              |                         ✅                          | Synchronizes changes<br/>from a template repo<br/>to a derived repo |
 
 ### Other Files
 
-| File                                   | Exists only</br>in this repo | Synced to<br/>(and overridden in)<br/>derived repos | Purpose                                     |
-| :------------------------------------- | :--------------------------: | :-------------------------------------------------: | :------------------------------------------ |
-| 📁[`.vscode/`][vsCode]                 |                              |                         ✅                          | Contains VSCode settings                    |
-| 📁[`docs/`][docs]                      |              ✅              |                                                     | Contains documentation                      |
-| 📄[`_Checklist.md`][checklist]         |                              |                         ✅                          | New repo checklist                          |
-| 📄[`.editorconfig`][editorConfig]      |                              |                         ✅                          | [Style guide rule definitions][styleGuides] |
-| 📄[`.gitmessage`][message]             |                              |                         ✅                          | [Commit message template][messageGuide]     |
-| 📄[`copilot-instructions.md`][copilot] |                              |                         ✅                          | [Copilot configuration][copilotDoc]         |
-| 📄[`dependabot.yml`][dependabot]       |                              |                         ✅                          | [Dependabot configuration][dependabotDoc]   |
-| 📄[`settings.yml`][settings]           |                              |                         ✅                          | [Repo configuration][settingsDoc]           |
+| File                                 | Exists only</br>in this repo | Synced to<br/>(and overridden in)<br/>derived repos | Purpose                                     |
+| :----------------------------------- | :--------------------------: | :-------------------------------------------------: | :------------------------------------------ |
+| [`_Checklist.md`][checklist]         |                              |                         ✅                          | New repo checklist                          |
+| [`.editorconfig`][editorConfig]      |                              |                         ✅                          | [Style guide rule definitions][styleGuides] |
+| [`.gitmessage`][message]             |                              |                         ✅                          | [Commit message template][messageGuide]     |
+| [`copilot-instructions.md`][copilot] |                              |                         ✅                          | [Copilot configuration][copilotDoc]         |
+| [`dependabot.yml`][dependabot]       |                              |                         ✅                          | [Dependabot configuration][dependabotDoc]   |
+| [`docs/`][docs]                      |                              |                         ✅                          | Contains documentation                      |
+| [`settings.yml`][settings]           |                              |                         ✅                          | [Repo configuration][settingsDoc]           |
 
 <!-- Source Code URIs -->
 
@@ -143,7 +138,6 @@ flowchart TB
 [styleGuides]: ./docs/StyleGuides.md
 [support]: ./SUPPORT.md
 [sync]: ./.github/workflows/template-sync.yml
-[vsCode]: ./.vscode/
 
 <!-- Public URIs -->
 
