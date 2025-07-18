@@ -1,0 +1,41 @@
+name: Codecov Integration
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  codecov:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x" # Adjust this to your .NET version
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Test with coverage
+        run: dotnet test --collect:"XPlat Code Coverage" --settings test/Coverlet.runsettings --results-directory coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: coverage/**/coverage.opencover.xml
+          fail_ci_if_error: true
+# [![codecov](https://codecov.io/gh/YourUsername/YourRepo/branch/main/graph/badge.svg)](https://codecov.io/gh/YourUsername/YourRepo)
+
+# - name: Get version
+#   id: get_version
+#   run: echo "VERSION=$(dotnet gitversion /showvariable SemVer)" >> $GITHUB_OUTPUT
+
+# - name: Pack
+#   run: |
+#     dotnet pack --configuration Release \
+#     -p:RepositoryBranch=${{ github.ref_name }} \
+#     -p:PackageReleaseNotes="${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ steps.get_version.outputs.VERSION }}" \
+#     -p:PackageProjectUrl="${{ github.server_url }}/${{ github.repository }}"

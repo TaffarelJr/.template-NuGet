@@ -1,6 +1,6 @@
-# Creating a New Template Repo <!-- omit in toc -->
+# Creating a New NuGet Package Repo <!-- omit in toc -->
 
-Template repos use the [`.github`][template] repo
+NuGet package repos use the [`.template-NuGet`][template] repo
 as their base template.
 Follow these steps to create a new repo derived from it.
 
@@ -17,12 +17,10 @@ Follow these steps to create a new repo derived from it.
 
 ## 1. Create the new template repo
 
-- DO NOT use a template in GitHub when creating the new repo;
-  we'll implement Git merges to get the necessary files instead.
-- The new repo name should use the format: `.template-<type>`
-  - For example: `.template-NuGet`
+- DO NOT use a template in GitHub when creating the repo;
+  we'll implement Git merges to get the files instead.
 - Leave the description blank.
-- Don't add any files to the new repo, leave it empty.
+- Don't add any files to the repo, leave it empty.
 
 ## 2. Configure manual repo settings
 
@@ -40,7 +38,7 @@ The following settings must be configured manually:
     - Go to `General`
       - Check `Allow GitHub Actions to create and approve pull requests`
       - Click `Save`
-  - Go to `Advanced Security`
+  - Go to `Code security`
     - Enable `Private vulnerability reporting`
     - Enable `Dependency graph` _(if necessary)_
     - Enable `Grouped security updates`
@@ -49,15 +47,15 @@ The following settings must be configured manually:
 ## 3. Clone the repo
 
 Clone the repo locally and open it in Visual Studio Code.
-The [`.github`][template] repo needs to be added as an upstream remote
+The [`.template-NuGet`][template] repo needs to be added as an upstream remote
 so the template sync can import the commits to the new repo
-with those in the [`.github`][template] repo.
+with those in the [`.template-NuGet`][template] repo.
 Execute the following commands:
 
 ```bash
 # May need to configure SSH key
 git config remote.pushdefault origin
-git remote add template git@github.com:TaffarelJr/.github.git
+git remote add template git@github.com:TaffarelJr/.template-NuGet.git
 git fetch template
 git checkout -B main template/main
 git config commit.template .gitmessage
@@ -65,17 +63,14 @@ git config commit.template .gitmessage
 
 ## 4. Customize template files
 
-Some files that were synced from the [`.github`][template] repo
-need to be customized for this new template repo.
+Some files that were synced from the [`.template-NuGet`][template] repo
+need to be customized for this new repo.
 
 - Delete the following files that will
-  reside only in the [`.github`][template] repo:
-  - `.github/ISSUE_TEMPLATE/config.yml`
-  - `.github/FUNDING.yml`
-  - `docs/`
-  - `CODE_OF_CONDUCT.md`
-- Find all instances of `TaffarelJr/.github` in the repo
-  - Replace them with `TaffarelJr/<new repo name>` in **ONLY** these files:
+  reside only in the [`.template-NuGet`][template] repo:
+  - `_Checklist.md`
+- Find all instances of `TaffarelJr/.template-NuGet` in the repo
+  - Replace it with `TaffarelJr/<new repo name>` in **ONLY** these files:
     - `CONTRIBUTING.md`
     - `SECURITY.md`
     - `SUPPORT.md`
@@ -87,29 +82,25 @@ need to be customized for this new template repo.
 ## 5. Customize root repo files
 
 Now we can add deeper customization to the root repo files
-to meet the needs of the new template:
+to meet the needs of the new repo:
 
-- Replace the contents of the `_Checklist.md` file
-  - Back up the previous file while you finish working through it
-- Modify `.editorconfig` as needed
-- Generate a `.gitattributes` file using https://github.com/gitattributes/gitattributes
-- Generate a `.gitignore` file using https://github.com/github/gitignore
 - Replace the contents of the `README.md` file
 - Add any additional ecosystems to `dependabot.yml`
+- Add a package icon as `Icon.png`
 - Add any additional root files necessary for the new template
 - Commit the changes with the message: `chore: customize root repo files`
 
 ## 6. Override repo settings
 
 Most of the settings in the `settings.yml` file
-are appropriate to inherit from the [`.github`][template] repo.
+are appropriate to inherit from the [`.template-NuGet`][template] repo.
 Only a few of them need to be overridden in the new template repo.
 
 Replace the contents of the file with the following,
 filling in the values as indicated:
 
 ```yaml
-_extends: .github
+_extends: .template-NuGet
 
 repository:
 
@@ -123,10 +114,6 @@ repository:
 
   # A URL with more information about the repo
   homepage: <URI, if applicable; otherwise, delete this property>
-
-  # A comma-separated list of topics to set on the repo
-  # See https://github.com/topics
-  topics: <topic 1>, <topic 2>, ...
 
   #─────────────────────────────────────────────────────────────────────────────
   # Settings → General
@@ -158,6 +145,6 @@ Finally, validate the template sync.
 To do this, go to `Actions` → `Template Sync` → `Run workflow` → `main`
 and click `Run workflow`. The process should complete with no changes.
 
-<!-- GitHub Repo URIs -->
+<!-- GitHub repo URIs -->
 
-[template]: https://github.com/TaffarelJr/.github
+[template]: https://github.com/TaffarelJr/.template-NuGet

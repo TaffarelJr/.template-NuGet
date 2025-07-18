@@ -1,0 +1,73 @@
+<Project>
+
+  <!-- ─────────────────────────────────────────────────────────────────────────
+  │ Settings
+  └───────────────────────────────────────────────────────────────────────── -->
+
+  <PropertyGroup Label="General Settings">
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>
+
+  <PropertyGroup Label="NuGet Package Settings">
+    <Authors>RJ Hollberg</Authors>
+    <Copyright>Copyright © $([System.DateTime]::Now.Year) RJ Hollberg. All rights reserved.</Copyright>
+    <Description></Description>
+    <IsPackable>true</IsPackable>
+    <PackageIcon>Icon.png</PackageIcon>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>$(PackageTags)</PackageTags>
+    <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
+    <SuppressDependenciesWhenPacking>false</SuppressDependenciesWhenPacking>
+  </PropertyGroup>
+
+  <PropertyGroup Label="NuGet Repo Links">
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+  <PropertyGroup Label="NuGet Debugging Support">
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <PropertyGroup Label="CI/CD Settings" Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    <RestoreLockedMode Condition="'$(GITHUB_ACTOR)' != 'dependabot[bot]'">true</RestoreLockedMode>
+  </PropertyGroup>
+
+  <!-- ─────────────────────────────────────────────────────────────────────────
+  │ Import shared settings
+  │
+  │ These settings might contain PropertyGroups and/or ItemGroups;
+  │ they must be imported here, so they can straddle both categories.
+  └───────────────────────────────────────────────────────────────────────── -->
+
+  <Import Project="$(MSBuildThisFileDirectory)..\Common.props" />
+
+  <!-- ─────────────────────────────────────────────────────────────────────────
+  │ Dependencies
+  └───────────────────────────────────────────────────────────────────────── -->
+
+  <ItemGroup Label="Development Dependencies">
+    <!-- Use wildcards for patch versions, to reduce churn. Use latest. -->
+    <PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="4.14.*" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.*" PrivateAssets="all" />
+  </ItemGroup>
+
+  <!-- ─────────────────────────────────────────────────────────────────────────
+  │ Additional Files
+  └───────────────────────────────────────────────────────────────────────── -->
+
+  <ItemGroup Label="NuGet Package Files">
+    <None Include="$(MSBuildThisFileDirectory)..\Icon.png" Link="Icon.png" Pack="true" PackagePath="" />
+    <None Include="$(MSBuildThisFileDirectory)..\LICENSE" Link="LICENSE" Pack="true" PackagePath="" />
+    <None Include="$(MSBuildThisFileDirectory)..\README.md" Link="README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+</Project>
