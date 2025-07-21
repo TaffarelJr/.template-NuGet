@@ -1,0 +1,107 @@
+codecov:
+  require_ci_to_pass: true
+  notify:
+    wait_for_ci: true
+
+coverage:
+  precision: 2
+  round: down
+  range: '70...90'
+  status:
+    project:
+      default:
+        target: auto
+        threshold: 1%
+    patch:
+      default:
+        target: 80%
+    changes: false
+
+parsers:
+  gcov:
+    branch_detection:
+      conditional: true
+      loop: true
+      method: false
+      macro: false
+
+comment:
+  layout: 'reach,diff,flags,files,footer'
+  behavior: default
+  require_changes: false
+  require_base: false
+  require_head: true
+
+flags:
+  # Target framework groupings
+  netFramework:
+    carryforward: true
+    paths:
+      - '**/TestResults/net462/'
+      - '**/TestResults/net47/'
+      - '**/TestResults/net471/'
+      - '**/TestResults/net472/'
+      - '**/TestResults/net48/'
+      - '**/TestResults/net481/'
+  netCore:
+    carryforward: true
+    paths:
+      - '**/TestResults/netcoreapp3.1/'
+  dotnet:
+    carryforward: true
+    paths:
+      - '**/TestResults/net5.0/'
+      - '**/TestResults/net6.0/'
+      - '**/TestResults/net7.0/'
+      - '**/TestResults/net8.0/'
+      - '**/TestResults/net9.0/'
+
+  # Individual target frameworks
+  net462:
+    carryforward: true
+    paths:
+      - '**/TestResults/net462/'
+  net47:
+    carryforward: true
+    paths:
+      - '**/TestResults/net47/'
+  net471:
+    carryforward: true
+    paths:
+      - '**/TestResults/net471/'
+  net472:
+    carryforward: true
+    paths:
+      - '**/TestResults/net472/'
+  net48:
+    carryforward: true
+    paths:
+      - '**/TestResults/net48/'
+  net481:
+    carryforward: true
+    paths:
+      - '**/TestResults/net481/'
+  netcoreapp3_1:
+    carryforward: true
+    paths:
+      - '**/TestResults/netcoreapp3.1/'
+  net5_0:
+    carryforward: true
+    paths:
+      - '**/TestResults/net5.0/'
+  net6_0:
+    carryforward: true
+    paths:
+      - '**/TestResults/net6.0/'
+  net7_0:
+    carryforward: true
+    paths:
+      - '**/TestResults/net7.0/'
+  net8_0:
+    carryforward: true
+    paths:
+      - '**/TestResults/net8.0/'
+  net9_0:
+    carryforward: true
+    paths:
+      - '**/TestResults/net9.0/'
