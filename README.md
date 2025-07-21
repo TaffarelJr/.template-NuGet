@@ -1,11 +1,7 @@
-# `.github` Repository <!-- omit from toc -->
+# NuGet Template Repository <!-- omit from toc -->
 
-This is a special, base template repo that contains
-default [community health files][health], [templates][templates],
-[workflows][workflows], and any other files
-to be shared with derived repositories.
-For more information on how this special repo works,
-see this article on [freeCodeCamp][freeCodeCamp].
+This is a template repo that contains the default configuration
+for building and publishing a single NuGet package.
 
 ```mermaid
 ---
@@ -53,7 +49,7 @@ flowchart TB
   end
 
   classDef current fill:#E68A39,color:#000000
-  class gh current
+  class T1,T2 current
 
   classDef sub opacity:0
   class subGH,subT,subR sub

@@ -1,0 +1,35 @@
+#       - name: Generate coverage report
+#         uses: danielpalme/ReportGenerator-GitHub-Action@5.2.4
+#         with:
+#           reports: "coverage/**/coverage.opencover.xml"
+#           targetdir: "coveragereport"
+#           reporttypes: "HtmlInline;Cobertura;Badges"
+
+#       - name: Upload coverage report artifact
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: CoverageReport
+#           path: coveragereport
+
+#       - name: Create Cobertura coverage badge
+#         uses: simon-k/dotnet-code-coverage-badge@v1.0.0
+#         id: coverage_badge
+#         with:
+#           label: Coverage
+#           color: brightgreen
+#           path: coveragereport/Cobertura.xml
+#           gist-filename: code-coverage.json
+#           gist-id: ${{ secrets.COVERAGE_GIST_ID }}
+#           gist-auth-token: ${{ secrets.GITHUB_TOKEN }}
+
+#       - name: Add Coverage PR Comment with Badge
+#         uses: marocchino/sticky-pull-request-comment@v2
+#         if: github.event_name == 'pull_request'
+#         with:
+#           header: coverage-badge
+#           message: |
+#             ## Code Coverage: ${{ steps.coverage_badge.outputs.percentage }}%
+
+#             ![Code Coverage](${{ steps.coverage_badge.outputs.url }})
+
+#             [View detailed coverage report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
