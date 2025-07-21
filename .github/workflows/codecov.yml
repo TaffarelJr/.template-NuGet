@@ -1,0 +1,14 @@
+#       - name: Upload coverage to Codecov
+#         uses: codecov/codecov-action@v3
+#         with:
+#           files: coverage/**/coverage.opencover.xml
+#           fail_ci_if_error: true
+
+# # [![codecov](https://codecov.io/gh/YourUsername/YourRepo/branch/main/graph/badge.svg)](https://codecov.io/gh/YourUsername/YourRepo)
+
+# # - name: Pack
+# #   run: |
+# #     dotnet pack --configuration Release \
+# #     -p:RepositoryBranch=${{ github.ref_name }} \
+# #     -p:PackageReleaseNotes="${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ steps.get_version.outputs.VERSION }}" \
+# #     -p:PackageProjectUrl="${{ github.server_url }}/${{ github.repository }}"

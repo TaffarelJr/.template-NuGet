@@ -1,0 +1,231 @@
+name: Continuous Integration
+
+on:
+  #   pull_request:
+  #     branches: [main]
+  push:
+    branches: [main]
+
+  workflow_dispatch:
+#     inputs:
+#       publish:
+#         description: "Publish NuGet package"
+#         type: boolean
+#         default: false
+
+jobs:
+  build-and-test:
+    name: Build and Test
+    runs-on: windows-latest # Needed to support .NET Framework
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: pwsh
+    #     outputs:
+    #       version: ${{ steps.version.outputs.semVer }}
+    #     permissions:
+    #       contents: write
+    env:
+      DEPENDABOT_USERNAME: dependabot[bot]
+      DEPENDABOT_EMAIL: 49699333+dependabot[bot]@users.noreply.github.com
+      DEPENDABOT_AUTHOR: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+    steps:
+      #─────────────────────────────────────────────────────────────────────────
+      # Prepare Environment
+      #─────────────────────────────────────────────────────────────────────────
+
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+          dotnet-version: |
+            3.1.x
+            5.0.x
+            6.0.x
+            7.0.x
+            8.0.x
+
+      - name: Setup dependency cache
+        uses: actions/cache@v4
+        with:
+          path: ~\.nuget\packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**\*.csproj') }}
+          restore-keys: ${{ runner.os }}-nuget-
+
+      - name: Setup GitVersion
+        uses: gittools/actions/gitversion/setup@v4
+        with:
+          versionSpec: 6.x
+
+      - name: Configure Environment
+        run: git config --unset-all extensions.worktreeconfig || true
+
+      #─────────────────────────────────────────────────────────────────────────
+      # Restore Dependencies
+      #─────────────────────────────────────────────────────────────────────────
+
+      - name: Restore dependencies
+        run: |
+          dotnet tool restore
+          if ('${{ github.actor }}' -eq '${{ env.DEPENDABOT_USERNAME }}') {
+            dotnet restore --nologo --force-evaluate
+          } else {
+            dotnet restore --nologo
+          }
+
+      - name: (Dependabot) Prepare to commit lock file changes
+        if: ${{ github.actor == env.DEPENDABOT_USERNAME }}
+        id: last-commit
+        run: |
+          git config --local user.name '${{ env.DEPENDABOT_USERNAME }}'
+          git config --local user.email '${{ env.DEPENDABOT_EMAIL }}'
+          'message=$(git log -1 --pretty=%B)' >> $Env:GITHUB_OUTPUT
+
+      - name: (Dependabot) Commit lock file changes
+        if: ${{ github.actor == env.DEPENDABOT_USERNAME }}
+        uses: stefanzweifel/git-auto-commit-action@v6
+        with:
+          commit_message: ${{ steps.last-commit.outputs.message }}
+          file_pattern: src\*\packages.lock.json
+          commit_options: --amend --no-edit
+          push_options: --force
+          commit_author: ${{ env.DEPENDABOT_AUTHOR }}
+          commit_user_name: ${{ env.DEPENDABOT_USERNAME }}
+          commit_user_email: ${{ env.DEPENDABOT_EMAIL }}
+
+      #─────────────────────────────────────────────────────────────────────────
+      # Build Code
+      #─────────────────────────────────────────────────────────────────────────
+
+      - name: Determine version
+        id: version
+        uses: gittools/actions/gitversion/execute@v4
+
+      - name: Build code
+        run: >
+          dotnet build
+          --nologo
+          --no-restore
+          --configuration Release
+          -p:Version=${{ steps.version.outputs.semVer }}
+          -p:AssemblyVersion=${{ steps.version.outputs.assemblySemVer }}
+          -p:FileVersion=${{ steps.version.outputs.assemblySemFileVer }}
+          -p:InformationalVersion=${{ steps.version.outputs.informationalVersion }}
+
+      #─────────────────────────────────────────────────────────────────────────
+      # Run Tests
+      #─────────────────────────────────────────────────────────────────────────
+
+      - name: Run tests
+        run: >
+          dotnet test
+          --nologo
+          --no-restore
+          --no-build
+          --configuration Release
+          --settings test/Test.runsettings
+          --collect:'XPlat Code Coverage'
+
+      - name: Upload test coverage
+        uses: codecov/codecov-action@v3
+        with:
+          files: "**/coverage.cobertura.xml"
+          name: codecov-umbrella
+          fail_ci_if_error: true
+
+      #─────────────────────────────────────────────────────────────────────────
+      # Build NuGet Package
+      #─────────────────────────────────────────────────────────────────────────
+#       - name: Build NuGet package
+#         run: >
+#           dotnet pack
+#           --nologo
+#           --no-restore
+#           --no-build
+#           --configuration Release
+#           -p:RepositoryBranch=${{ github.ref_name }}
+#           -p:PackageProjectUrl='${{ github.server_url }}/${{ github.repository }}'
+#           -p:PackageReleaseNotes='${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ steps.version.outputs.semVer }}'
+
+#       - name: Upload NuGet package artifacts
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: nuget-packages
+#           path: src/**/*.nupkg
+#           retention-days: 7
+
+#   publish:
+#     name: Publish NuGet Package
+#     needs: build-and-test
+#     if: ${{ github.event_name == 'workflow_dispatch' && inputs.publish || github.event_name == 'push' && github.ref == 'refs/heads/main' && contains(github.event.head_commit.message, '[release]') }}
+#     runs-on: windows-latest
+#     defaults:
+#       run:
+#         shell: pwsh
+#     permissions:
+#       contents: write
+#       packages: write
+#     steps:
+#       - name: Checkout repo for release notes
+#         uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 0
+
+#       - name: Download NuGet packages
+#         uses: actions/download-artifact@v4
+#         with:
+#           name: nuget-packages
+#           path: nuget-packages
+
+#       - name: Setup .NET
+#         uses: actions/setup-dotnet@v4
+
+#       - name: Generate release notes
+#         id: release-notes
+#         run: |
+#           # Install required tools
+#           dotnet tool install -g GitReleaseManager.Tool
+
+#           # Extract version
+#           $VERSION="${{ needs.build-and-test.outputs.version }}"
+#           Write-Host "Version: $VERSION"
+
+#           # Generate release notes
+#           dotnet-gitreleasemanager export -o ${{ github.repository_owner }} -r ${{ github.event.repository.name }} --token ${{ secrets.GITHUB_TOKEN }} -f CHANGELOG.md
+
+#           # Format for GitHub release
+#           @"
+#           ## Changes in v$VERSION
+#
+#           $(Get-Content -Path CHANGELOG.md -Raw)
+#           "@ > ReleaseNotes.md
+
+#           "RELEASE_NOTES_PATH=ReleaseNotes.md" >> $env:GITHUB_OUTPUT
+
+#       - name: Create GitHub Release
+#         id: create-release
+#         uses: softprops/action-gh-release@v1
+#         with:
+#           tag_name: v${{ needs.build-and-test.outputs.version }}
+#           name: Release v${{ needs.build-and-test.outputs.version }}
+#           body_path: ${{ steps.release-notes.outputs.RELEASE_NOTES_PATH }}
+#           draft: false
+#           prerelease: ${{ contains(needs.build-and-test.outputs.version, '-') }}
+#           files: nuget-packages/**/*.nupkg
+#           fail_on_unmatched_files: true
+#           token: ${{ secrets.GITHUB_TOKEN }}
+
+#       - name: Publish to NuGet.org
+#         run: dotnet nuget push "nuget-packages/**/*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+
+#       - name: Publish to GitHub Packages
+#         run: |
+#           $packages = Get-ChildItem -Path "nuget-packages" -Filter "*.nupkg" -Recurse
+#           foreach ($package in $packages) {
+#             dotnet nuget push $package.FullName --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
+#           }
