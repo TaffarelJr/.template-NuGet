@@ -1,0 +1,32 @@
+name: Validate Codecov
+
+on:
+  workflow_dispatch:
+
+  pull_request:
+    paths:
+      - "codecov.yml"
+
+jobs:
+  validate:
+    name: Validate codecov.yml
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Validate codecov.yml
+        run: |
+          OUTPUT=$(curl -f -s --data-binary @codecov.yml https://codecov.io/validate)
+          STATUS=$?
+
+          echo "$OUTPUT"
+
+          if [ $STATUS -eq 0 ]; then
+            echo "✅ codecov.yml is valid"
+          else
+            echo "❌ codecov.yml is invalid"
+            exit 1
+          fi
