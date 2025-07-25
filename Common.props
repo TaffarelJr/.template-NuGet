@@ -1,0 +1,123 @@
+<Project>
+
+  <!-- ─────────────────────────────────────────────────────────────────────────
+  │ Settings
+  └───────────────────────────────────────────────────────────────────────── -->
+
+  <PropertyGroup Label="General Settings">
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup Label="CodeAnalysis Settings">
+    <AnalysisLevel>latest-all</AnalysisLevel>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <!-- ─────────────────────────────────────────────────────────────────────────
+  │ Platform-specific settings
+  └───────────────────────────────────────────────────────────────────────── -->
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='net462'">
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='net47'">
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='net471'">
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='net472'">
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='net48'">
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='net481'">
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.1'">
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp3.1'">
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='net5.0'">
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='net6.0'">
+    <DefineConstants>$(DefineConstants);CSHARP10</DefineConstants>
+    <ImplicitUsings>disable</ImplicitUsings>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='net7.0'">
+    <DefineConstants>$(DefineConstants);CSHARP10;CSHARP11</DefineConstants>
+    <ImplicitUsings>disable</ImplicitUsings>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='net8.0'">
+    <DefineConstants>$(DefineConstants);CSHARP10;CSHARP11;CSHARP12</DefineConstants>
+    <ImplicitUsings>disable</ImplicitUsings>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='net9.0'">
+    <DefineConstants>$(DefineConstants);CSHARP10;CSHARP11;CSHARP12;CSHARP13</DefineConstants>
+    <ImplicitUsings>disable</ImplicitUsings>
+  </PropertyGroup>
+
+  <!-- ─────────────────────────────────────────────────────────────────────────
+  │ Dependencies
+  └───────────────────────────────────────────────────────────────────────── -->
+
+  <ItemGroup Label="Development Dependencies">
+    <!-- Use wildcard patch versions to reduce churn. Use latest (except pinned). -->
+    <PackageReference PrivateAssets="all" Include="AsyncFixer" Version="1.6.*" />
+    <PackageReference PrivateAssets="all" Include="IDisposableAnalyzers" Version="4.0.*" />
+    <PackageReference PrivateAssets="all" Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.14.*" />
+    <PackageReference PrivateAssets="all" Include="Roslynator.Analyzers" Version="4.13.*" />
+    <PackageReference PrivateAssets="all" Include="Roslynator.Formatting.Analyzers" Version="4.13.*" />
+    <PackageReference PrivateAssets="all" Include="SecurityCodeScan.VS2019" Version="5.6.*" />
+    <PackageReference PrivateAssets="all" Include="StyleCop.Analyzers" Version="1.2.0-beta.*" />
+  </ItemGroup>
+
+  <!-- ─────────────────────────────────────────────────────────────────────────
+  │ Additional Files
+  └───────────────────────────────────────────────────────────────────────── -->
+
+  <ItemGroup Label="CodeAnalysis Settings">
+    <AdditionalFiles Include="$(MSBuildThisFileDirectory)StyleCop.json" Link="StyleCop.json" />
+  </ItemGroup>
+
+  <!-- ─────────────────────────────────────────────────────────────────────────
+  │ Build targets
+  └───────────────────────────────────────────────────────────────────────── -->
+
+  <Target Name="DumpAllProperties">
+    <!-- For debugging - to view all MSBuild properties, run this command:
+    dotnet msbuild -t:DumpAllProperties /v:diag > msbuild.log -->
+    <PropertyGroup>
+      <_AllProps>$(MSBuildAllProjects)</_AllProps>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <_Props Include="@(Property)" />
+    </ItemGroup>
+
+    <Message Text="═══════════════════ PROPERTY DUMP STARTED ═══════════════════" Importance="High" />
+    <Message Text="Name: %( _Props.Identity ) = %( _Props.Value )" Importance="High" />
+    <Message Text="═══════════════════ PROPERTY DUMP FINISHED ══════════════════" Importance="High" />
+  </Target>
+
+</Project>
