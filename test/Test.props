@@ -1,0 +1,67 @@
+<Project>
+
+  <!-- ─────────────────────────────────────────────────────────────────────────
+  │ Settings
+  └───────────────────────────────────────────────────────────────────────── -->
+
+  <PropertyGroup Label="NuGet Package Settings">
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <!-- ─────────────────────────────────────────────────────────────────────────
+  │ Import shared settings
+  │
+  │ These settings might contain PropertyGroups and/or ItemGroups;
+  │ they must be imported here, so they can straddle both categories.
+  └───────────────────────────────────────────────────────────────────────── -->
+
+  <Import Project="$(MSBuildThisFileDirectory)..\Common.props" />
+
+  <!-- ─────────────────────────────────────────────────────────────────────────
+  │ Dependencies
+  └───────────────────────────────────────────────────────────────────────── -->
+
+  <ItemGroup Label="Test Integration Tools">
+    <!-- Use wildcard patch versions to reduce churn. Use latest (except pinned). -->
+    <PackageReference PrivateAssets="all" Include="coverlet.collector" Version="6.0.*" />
+    <PackageReference PrivateAssets="all" Include="Moq.Analyzers" Version="0.3.*" />
+    <PackageReference PrivateAssets="all" Include="xunit.analyzers" Version="1.24.*" />
+    <PackageReference PrivateAssets="all" Include="xunit.runner.console" Version="2.9.*" />
+    <PackageReference PrivateAssets="all" Include="xunit.runner.visualstudio" Version="[2.4.5]" />
+  </ItemGroup>
+
+  <ItemGroup Label="Test Platform">
+    <!-- Use wildcard patch versions to reduce churn. Use latest (except pinned). -->
+    <PackageReference Include="JunitXml.TestLogger" Version="6.1.*" /> <!-- Used by Codecov -->
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.*" Condition="'$(TargetFramework)'=='net462'" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.*" Condition="'$(TargetFramework)'=='net47'" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.*" Condition="'$(TargetFramework)'=='net471'" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.*" Condition="'$(TargetFramework)'=='net472'" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.*" Condition="'$(TargetFramework)'=='net48'" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.*" Condition="'$(TargetFramework)'=='net481'" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="[17.3.3]" Condition="'$(TargetFramework)'=='netcoreapp3.0'" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="[17.13.0]" Condition="'$(TargetFramework)'=='netcoreapp3.1'" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="[17.13.0]" Condition="'$(TargetFramework)'=='net5.0'" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="[17.13.0]" Condition="'$(TargetFramework)'=='net6.0'" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="[17.13.0]" Condition="'$(TargetFramework)'=='net7.0'" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.*" Condition="'$(TargetFramework)'=='net8.0'" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.*" Condition="'$(TargetFramework)'=='net9.0'" />
+    <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="17.14.*" Condition="'$(TargetFramework)'=='net462'" />
+    <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="17.14.*" Condition="'$(TargetFramework)'=='net47'" />
+    <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="17.14.*" Condition="'$(TargetFramework)'=='net471'" />
+    <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="17.14.*" Condition="'$(TargetFramework)'=='net472'" />
+    <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="17.14.*" Condition="'$(TargetFramework)'=='net48'" />
+    <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="17.14.*" Condition="'$(TargetFramework)'=='net481'" />
+    <PackageReference Include="Microsoft.TestPlatform.TestHost" Version="17.14.*" Condition="'$(TargetFramework)'=='net462'" />
+    <PackageReference Include="Microsoft.TestPlatform.TestHost" Version="17.14.*" Condition="'$(TargetFramework)'=='net47'" />
+    <PackageReference Include="Microsoft.TestPlatform.TestHost" Version="17.14.*" Condition="'$(TargetFramework)'=='net471'" />
+    <PackageReference Include="Microsoft.TestPlatform.TestHost" Version="17.14.*" Condition="'$(TargetFramework)'=='net472'" />
+    <PackageReference Include="Microsoft.TestPlatform.TestHost" Version="17.14.*" Condition="'$(TargetFramework)'=='net48'" />
+    <PackageReference Include="Microsoft.TestPlatform.TestHost" Version="17.14.*" Condition="'$(TargetFramework)'=='net481'" />
+    <PackageReference Include="Moq" Version="4.20.*" />
+    <PackageReference Include="Moq.AutoMock" Version="3.5.*" />
+    <PackageReference Include="Shouldly" Version="4.3.*" />
+    <PackageReference Include="xunit" Version="2.9.*" />
+  </ItemGroup>
+
+</Project>
