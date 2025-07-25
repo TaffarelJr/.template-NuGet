@@ -74,6 +74,7 @@ flowchart TB
   - [GitHub Workflows](#github-workflows)
   - [.NET Configuration](#net-configuration)
   - [.NET Placeholder Solution](#net-placeholder-solution)
+  - [Build Scripts](#build-scripts)
   - [Other Files](#other-files)
 
 ## Description of Files in This Template Repo
@@ -144,6 +145,15 @@ because most files need repo-specific customization.
 | 📄[Icon.svg][iconSourceFile]                      | NuGet package icon source                   |
 | 📄[Placeholder.sln][solutionFile]                 | Visual Studio solution                      |
 
+### Build Scripts
+
+| File                       | Description                           |
+| :------------------------- | :------------------------------------ |
+| 📄[Build.ps1][buildPsFile] | Full build script (PowerShell)        |
+| 📄[build.sh][buildShFile]  | Full build script (bash)              |
+| 📄[Test.ps1][testPsFile]   | Full build & test script (PowerShell) |
+| 📄[Test.sh][testShFile]    | Full build & test script (bash)       |
+
 ### Other Files
 
 | File                                  | Description                                      |
@@ -184,6 +194,8 @@ because most files need repo-specific customization.
 [gitIgnoreFile]: ./.gitignore
 [gitMessageFile]: ./.gitmessage
 [vsConfigFile]: ./.vsconfig
+[buildPsFile]: ./Build.ps1
+[buildShFile]: ./build.sh
 [cocFile]: ./CODE_OF_CONDUCT.md
 [commonPropsFile]: ./Common.props
 [contribFile]: ./CONTRIBUTING.md
@@ -196,6 +208,8 @@ because most files need repo-specific customization.
 [securityFile]: ./SECURITY.md
 [styleCopFile]: ./StyleCop.json
 [supportFile]: ./SUPPORT.md
+[testPsFile]: ./Test.ps1
+[testShFile]: ./test.sh
 
 <!-- GitHub Repo URIs (alphabetical by name) -->
 
