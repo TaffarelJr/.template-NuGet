@@ -11,8 +11,9 @@ Follow these steps to create a new repo derived from it.
 - [4. Customize template files](#4-customize-template-files)
 - [5. Customize root files](#5-customize-root-files)
 - [6. Customize repo settings](#6-customize-repo-settings)
-- [7. Push the changes to GitHub](#7-push-the-changes-to-github)
-- [8. Run the Template Sync workflow](#8-run-the-template-sync-workflow)
+- [7. Customize VS Solution](#7-customize-vs-solution)
+- [8. Push the changes to GitHub](#8-push-the-changes-to-github)
+- [9. Run the Template Sync workflow](#9-run-the-template-sync-workflow)
 
 ## 1. Create the new repo
 
@@ -164,7 +165,38 @@ Only a few need to be overridden in the new repo.
   git commit -m 'chore: customize repo settings'
   ```
 
-## 7. Push the changes to GitHub
+## 7. Customize VS Solution
+
+- Find all instances of `Placeholder` in the new repo
+  - Replace with `<NuGet package name>` in **ONLY** these files:
+    - [Placeholder.sln][solutionFile]
+    - Project files under [src/][srcFolder]
+    - Project files under [test/][testFolder]
+- Find all folders and files named `Placeholder` in the new repo
+  - Rename with `<NuGet package name>`:
+    - [Placeholder.sln][solutionFile]
+    - Project folders and files under [src/][srcFolder]
+    - Project folders and files under [test/][testFolder]
+- Delete all content from [PublicAPI.Unshipped.txt][unshippedApiFile]
+- Delete temporary classes in all projects
+- Update [Icon.svg][iconSourceFile] with a new image
+  - Good source: https://www.iconfinder.com/
+  - Format the SVG code for human-readability
+- Overwrite [Icon.png][iconFile] with new export from SVG
+  - Should be 128x128, transparent background
+- Add additional projects if necessary
+- Validate project dependencies
+- Update NuGet dependencies
+- Make sure the solution builds successfully
+- Make sure all tests pass
+- Make sure there are no warnings or messages
+- Commit the changes, using the following commit message:
+
+  ```bash
+  git commit -m 'chore: customize VS solution'
+  ```
+
+## 8. Push the changes to GitHub
 
 Push the branch to GitHub:
 
@@ -175,7 +207,7 @@ git push
 The settings should take effect almost immediately.
 Verify that the new repo description and topics appear on the home page.
 
-## 8. Run the [Template Sync][syncFile] workflow
+## 9. Run the [Template Sync][syncFile] workflow
 
 Finally, validate the template sync workflow:
 
@@ -193,11 +225,17 @@ and without creating a Pull Request.
 [syncFile]: ./.github/workflows/template-sync.yml
 [dependabotFile]: ./.github/dependabot.yml
 [settingsFile]: ./.github/settings.yml
+[srcFolder]: ./src/
+[unshippedApiFile]: ./src/Placeholder/PublicAPI.Unshipped.txt
+[testFolder]: ./test/
 [checklistFile]: ./_checklist.md
 [editorConfigFile]: ./.editorconfig
 [gitAttributesFile]: ./.gitattributes
 [gitIgnoreFile]: ./.gitignore
 [contribFile]: ./CONTRIBUTING.md
+[iconFile]: ./Icon.png
+[iconSourceFile]: ./Icon.svg
+[solutionFile]: ./Placeholder.sln
 [readmeFile]: ./README.md
 [securityFile]: ./SECURITY.md
 [supportFile]: ./SUPPORT.md

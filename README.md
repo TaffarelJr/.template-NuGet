@@ -73,6 +73,7 @@ flowchart TB
   - [GitHub Configuration](#github-configuration)
   - [GitHub Workflows](#github-workflows)
   - [.NET Configuration](#net-configuration)
+  - [.NET Placeholder Solution](#net-placeholder-solution)
   - [Other Files](#other-files)
 
 ## Description of Files in This Template Repo
@@ -128,6 +129,21 @@ because most files need repo-specific customization.
 | 📄[nuget.config][nugetConfigFile] | NuGet settings                    |
 | 📄[StyleCop.json][styleCopFile]   | StyleCop (code analysis) settings |
 
+### .NET Placeholder Solution
+
+| File                                              | Description                                 |
+| :------------------------------------------------ | :------------------------------------------ |
+| 📁[src/][srcFolder]                               | Contains production code                    |
+| &nbsp;└─📄[Production.props][prodPropsFile]       | .NET project properties for production code |
+| 📁[test/][testFolder]                             | Contains test code                          |
+| &nbsp;├─📄[.editorconfig][testEditorConfigFile]   | Code analysis exceptions for test code      |
+| &nbsp;├─📄[Test.props][testPropsFile]             | .NET project properties for test code       |
+| &nbsp;└─📄[Test.runsettings][testRunsettingsFile] | .NET test run settings                      |
+| 📄[Common.props][commonPropsFile]                 | .NET project properties for all code        |
+| 📄[Icon.png][iconFile]                            | NuGet package icon                          |
+| 📄[Icon.svg][iconSourceFile]                      | NuGet package icon source                   |
+| 📄[Placeholder.sln][solutionFile]                 | Visual Studio solution                      |
+
 ### Other Files
 
 | File                                  | Description                                      |
@@ -156,6 +172,12 @@ because most files need repo-specific customization.
 [docsFolder]: ./docs/
 [styleguideFile]: ./docs/Styleguide.md
 [styleguideFile-commit]: ./docs/Styleguide.md#commit-messages
+[srcFolder]: ./src/
+[prodPropsFile]: ./src/Production.props
+[testFolder]: ./test/
+[testEditorConfigFile]: ./test/.editorconfig
+[testPropsFile]: ./test/Test.props
+[testRunsettingsFile]: ./test/Test.runsettings
 [checklistFile]: ./_checklist.md
 [editorConfigFile]: ./.editorconfig
 [gitAttributesFile]: ./.gitattributes
@@ -163,10 +185,14 @@ because most files need repo-specific customization.
 [gitMessageFile]: ./.gitmessage
 [vsConfigFile]: ./.vsconfig
 [cocFile]: ./CODE_OF_CONDUCT.md
+[commonPropsFile]: ./Common.props
 [contribFile]: ./CONTRIBUTING.md
 [globalJsonFile]: ./global.json
+[iconFile]: ./Icon.png
+[iconSourceFile]: ./Icon.svg
 [licenseFile]: ./LICENSE
 [nugetConfigFile]: ./nuget.config
+[solutionFile]: ./Placeholder.sln
 [securityFile]: ./SECURITY.md
 [styleCopFile]: ./StyleCop.json
 [supportFile]: ./SUPPORT.md

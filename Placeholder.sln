@@ -1,0 +1,103 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11217.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".config", ".config", "{8019375E-8EF8-4A58-9309-0A356DB0491D}"
+	ProjectSection(SolutionItems) = preProject
+		.config\dotnet-tools.json = .config\dotnet-tools.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{B50175D7-072F-45EB-8E70-8ACB81B55024}"
+	ProjectSection(SolutionItems) = preProject
+		.github\CODEOWNERS = .github\CODEOWNERS
+		.github\copilot-instructions.md = .github\copilot-instructions.md
+		.github\dependabot.yml = .github\dependabot.yml
+		.github\pull_request_template.md = .github\pull_request_template.md
+		.github\settings.yml = .github\settings.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ISSUE_TEMPLATE", "ISSUE_TEMPLATE", "{261C00A6-E9BA-4EFC-9992-C75061255EED}"
+	ProjectSection(SolutionItems) = preProject
+		.github\ISSUE_TEMPLATE\01_new_feature.yml = .github\ISSUE_TEMPLATE\01_new_feature.yml
+		.github\ISSUE_TEMPLATE\02_enhancement.yml = .github\ISSUE_TEMPLATE\02_enhancement.yml
+		.github\ISSUE_TEMPLATE\03_bug_report.yml = .github\ISSUE_TEMPLATE\03_bug_report.yml
+		.github\ISSUE_TEMPLATE\04_performance_issue.yml = .github\ISSUE_TEMPLATE\04_performance_issue.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{C7A64F19-DF59-4B16-A9C9-5D317FCF26CD}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\template-sync.yml = .github\workflows\template-sync.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{B2228305-B55C-488C-899C-AF63F4FADA15}"
+	ProjectSection(SolutionItems) = preProject
+		docs\ConventionalCommits.md = docs\ConventionalCommits.md
+		docs\Styleguide.md = docs\Styleguide.md
+		docs\VerticalRulers.md = docs\VerticalRulers.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		.gitmessage = .gitmessage
+		.vsconfig = .vsconfig
+		CODE_OF_CONDUCT.md = CODE_OF_CONDUCT.md
+		Common.props = Common.props
+		CONTRIBUTING.md = CONTRIBUTING.md
+		global.json = global.json
+		Icon.png = Icon.png
+		Icon.svg = Icon.svg
+		LICENSE = LICENSE
+		nuget.config = nuget.config
+		README.md = README.md
+		SECURITY.md = SECURITY.md
+		StyleCop.json = StyleCop.json
+		SUPPORT.md = SUPPORT.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		src\Production.props = src\Production.props
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Placeholder", "src\Placeholder\Placeholder.csproj", "{480242FD-3FE7-4E71-9A1F-0FC446F1D20B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{E5056391-64A9-4E23-B6F7-9596973E2D46}"
+	ProjectSection(SolutionItems) = preProject
+		test\.editorconfig = test\.editorconfig
+		test\Test.props = test\Test.props
+		test\Test.runsettings = test\Test.runsettings
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Placeholder.Tests", "test\Placeholder.Tests\Placeholder.Tests.csproj", "{0AEDD51E-D879-4F43-80F4-A3F6E9DF2B06}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{480242FD-3FE7-4E71-9A1F-0FC446F1D20B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{480242FD-3FE7-4E71-9A1F-0FC446F1D20B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{480242FD-3FE7-4E71-9A1F-0FC446F1D20B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{480242FD-3FE7-4E71-9A1F-0FC446F1D20B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AEDD51E-D879-4F43-80F4-A3F6E9DF2B06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AEDD51E-D879-4F43-80F4-A3F6E9DF2B06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AEDD51E-D879-4F43-80F4-A3F6E9DF2B06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AEDD51E-D879-4F43-80F4-A3F6E9DF2B06}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{261C00A6-E9BA-4EFC-9992-C75061255EED} = {B50175D7-072F-45EB-8E70-8ACB81B55024}
+		{C7A64F19-DF59-4B16-A9C9-5D317FCF26CD} = {B50175D7-072F-45EB-8E70-8ACB81B55024}
+		{480242FD-3FE7-4E71-9A1F-0FC446F1D20B} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{0AEDD51E-D879-4F43-80F4-A3F6E9DF2B06} = {E5056391-64A9-4E23-B6F7-9596973E2D46}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {59A0E416-6964-4EC2-93F4-8B2EA777E49D}
+	EndGlobalSection
+EndGlobal

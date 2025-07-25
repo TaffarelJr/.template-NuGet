@@ -1,0 +1,68 @@
+<Project>
+
+  <!-- ─────────────────────────────────────────────────────────────────────────
+  │ Settings
+  └───────────────────────────────────────────────────────────────────────── -->
+
+  <PropertyGroup Label="NuGet Package Settings">
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <!-- ─────────────────────────────────────────────────────────────────────────
+  │ Import shared settings
+  │
+  │ These settings might contain PropertyGroups and/or ItemGroups;
+  │ they must be imported here, so they can straddle both categories.
+  └───────────────────────────────────────────────────────────────────────── -->
+
+  <Import Project="$(MSBuildThisFileDirectory)..\Common.props" />
+
+  <!-- ─────────────────────────────────────────────────────────────────────────
+  │ Dependencies
+  └───────────────────────────────────────────────────────────────────────── -->
+
+  <ItemGroup Label="Test Integration Tools">
+    <!-- Use wildcard patch versions to reduce churn. Use latest (except pinned). -->
+    <PackageReference PrivateAssets="all" Include="coverlet.collector" Version="6.0.*" />
+    <PackageReference PrivateAssets="all" Include="Moq.Analyzers" Version="0.3.*" />
+    <PackageReference PrivateAssets="all" Include="xunit.analyzers" Version="1.25.*" />
+    <PackageReference PrivateAssets="all" Include="xunit.runner.console" Version="2.9.*" />
+    <PackageReference PrivateAssets="all" Include="xunit.runner.visualstudio" Version="[2.4.5]" /> <!-- Supports all .NET versions -->
+  </ItemGroup>
+
+  <ItemGroup Label="Test Platform" Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
+    <!-- Use wildcard patch versions to reduce churn. Use latest (except pinned). -->
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.*" />
+    <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="18.0.*" />
+    <PackageReference Include="Microsoft.TestPlatform.TestHost" Version="18.0.*" />
+  </ItemGroup>
+
+  <ItemGroup Label="Test Platform" Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
+    <!-- Pinned because support ended. -->
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="[17.3.3]" />
+  </ItemGroup>
+
+  <ItemGroup Label="Test Platform" Condition="'$(TargetFramework)' == 'netcoreapp3.1'
+                                           Or '$(TargetFramework)' == 'net5.0'
+                                           Or '$(TargetFramework)' == 'net6.0'
+                                           Or '$(TargetFramework)' == 'net7.0'">
+    <!-- Pinned because support ended. -->
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="[17.13.0]" />
+  </ItemGroup>
+
+  <ItemGroup Label="Test Platform" Condition="'$(TargetFramework)' == 'net8.0'
+                                           Or '$(TargetFramework)' == 'net9.0'
+                                           Or '$(TargetFramework)' == 'net10.0'">
+    <!-- Use wildcard patch versions to reduce churn. Use latest (except pinned). -->
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.*" />
+  </ItemGroup>
+
+  <ItemGroup Label="Test Utilities">
+    <!-- Use wildcard patch versions to reduce churn. Use latest (except pinned). -->
+    <PackageReference Include="Moq" Version="4.20.*" />
+    <PackageReference Include="Moq.AutoMock" Version="3.5.*" />
+    <PackageReference Include="Shouldly" Version="4.3.*" />
+    <PackageReference Include="xunit" Version="2.9.*" />
+  </ItemGroup>
+
+</Project>
