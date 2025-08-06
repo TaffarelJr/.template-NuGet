@@ -3,7 +3,7 @@ namespace Fake
     /// <summary>
     /// Represents a class with no specific functionality.
     /// </summary>
-    public static class Class1
+    public class Class1
     {
         /// <summary>
         /// Performs a calculation on the provided value.
@@ -18,5 +18,18 @@ namespace Fake
             return value * 3;
 #endif
         }
+
+        /// <inheritdoc/>
+        public override string ToString() => "Foo";
+
+        /// <summary>
+        /// Inverts a value.
+        /// </summary>
+        public static bool Invert(bool value) => !value;
+
+        //// /// <summary>
+        //// /// Checks if the provided value is true.
+        //// /// </summary>
+        //// public static bool IsTrue(bool value) => value;
     }
 }

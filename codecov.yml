@@ -29,7 +29,7 @@ flag_management:
     carryforward: true
 
 comment:
-  layout: condensed_header,header,reach,diff,flags,components,condensed_files,files,condensed_footer,footer
+  layout: condensed_header # ,header,reach,diff,flags,components,condensed_files,files,condensed_footer,footer
   behavior: default
   require_changes: false
   require_base: false
