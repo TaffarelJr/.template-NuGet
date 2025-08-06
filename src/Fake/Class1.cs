@@ -21,5 +21,10 @@ namespace Fake
 
         /// <inheritdoc/>
         public override string ToString() => "Foo";
+
+        /// <summary>
+        /// Inverts a value.
+        /// </summary>
+        public static bool Invert(bool value) => !value;
     }
 }
