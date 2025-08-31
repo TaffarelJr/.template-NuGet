@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".config", ".config", "{8019
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{B50175D7-072F-45EB-8E70-8ACB81B55024}"
 	ProjectSection(SolutionItems) = preProject
+		.github\codecov.yml = .github\codecov.yml
 		.github\CODEOWNERS = .github\CODEOWNERS
 		.github\copilot-instructions.md = .github\copilot-instructions.md
 		.github\dependabot.yml = .github\dependabot.yml
@@ -27,6 +28,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{C7A64F19-DF59-4B16-A9C9-5D317FCF26CD}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\template-sync.yml = .github\workflows\template-sync.yml
+		.github\workflows\validate-codecov.yml = .github\workflows\validate-codecov.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{B2228305-B55C-488C-899C-AF63F4FADA15}"

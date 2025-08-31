@@ -77,6 +77,7 @@ need to be customized for the new repo:
   - Replace with `TaffarelJr/<new repo name>` in **ONLY** these files:
     - [ISSUE_TEMPLATE/\*][issueFormsFolder]
     - [CONTRIBUTING.md][contribFile]
+    - [README.md][readmeFile]
     - [SECURITY.md][securityFile]
     - [SUPPORT.md][supportFile]
 - Find all instances of `TaffarelJr/.github` in the new repo
@@ -170,6 +171,7 @@ Only a few need to be overridden in the new repo.
 - Find all instances of `Placeholder` in the new repo
   - Replace with `<NuGet package name>` in **ONLY** these files:
     - [Placeholder.sln][solutionFile]
+    - [codecov.yml][codecovFile]
     - Project files under [src/][srcFolder]
     - Project files under [test/][testFolder]
 - Find all folders and files named `Placeholder` in the new repo
@@ -223,6 +225,7 @@ and without creating a Pull Request.
 
 [issueFormsFolder]: ./.github/ISSUE_TEMPLATE/
 [syncFile]: ./.github/workflows/template-sync.yml
+[codecovFile]: ./.github/codecov.yml
 [dependabotFile]: ./.github/dependabot.yml
 [settingsFile]: ./.github/settings.yml
 [srcFolder]: ./src/

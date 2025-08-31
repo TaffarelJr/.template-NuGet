@@ -1,5 +1,7 @@
 # NuGet Template Repository <!-- omit from toc -->
 
+[![Codecov](https://codecov.io/gh/TaffarelJr/.template-NuGet/graph/badge.svg)](https://codecov.io/gh/TaffarelJr/.template-NuGet)
+
 This is a template repo that contains the default configuration
 for building and publishing a single NuGet package.
 
@@ -107,6 +109,7 @@ because most files need repo-specific customization.
 | &nbsp;├─📁DISCUSSION_TEMPLATE/                       |                —                |                —                | Not implemented                                 |
 | &nbsp;├─📁[ISSUE_TEMPLATE/][issueFormsFolder]        |                                 |               ✅                | Contains [GitHub Issue forms][ghIssueForms]     |
 | &nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└─📄config.yml        |               ✅                |                                 | [GitHub Issue template chooser][ghIssueChooser] |
+| &nbsp;├─📄[codecov.yml][codecovFile]                 |               N/A               |               ✅                | [Codecov configuration][codecov]                |
 | &nbsp;├─📄[copilot-instructions.md][copilotFile]     |               N/A               |               ✅                | [Copilot configuration][ghCopilot]              |
 | &nbsp;├─📄[dependabot.yml][dependabotFile]           |               N/A               |               ✅                | [Dependabot configuration][ghDependabot]        |
 | &nbsp;├─📄[pull_request_template.md][prTemplateFile] |                                 |               ✅                | [GitHub Pull Request template][ghPRTemplate]    |
@@ -114,11 +117,12 @@ because most files need repo-specific customization.
 
 ### [GitHub Workflows][ghWorkflows]
 
-| Workflow                                                                    | Description                                               |
-| :-------------------------------------------------------------------------- | :-------------------------------------------------------- |
-| 📁[.github/][githubFolder]                                                  |                                                           |
-| &nbsp;└─📁[workflows/][workflowFolder]                                      |                                                           |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─📄[Template Sync][syncWorkflow] | Synchronizes files from a template repo to a derived repo |
+| Workflow                                                                          | Description                                               |
+| :-------------------------------------------------------------------------------- | :-------------------------------------------------------- |
+| 📁[.github/][githubFolder]                                                        |                                                           |
+| &nbsp;└─📁[workflows/][workflowFolder]                                            |                                                           |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─📄[Template Sync][syncWorkflow]       | Synchronizes files from a template repo to a derived repo |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─📄[Validate Codecov][codecovWorkflow] | Validates changes to [codecov.yml][codecovFile]           |
 
 ### .NET Configuration
 
@@ -172,6 +176,8 @@ because most files need repo-specific customization.
 [issueFormsFolder]: ./.github/ISSUE_TEMPLATE/
 [workflowFolder]: ./.github/workflows/
 [syncWorkflow]: ./.github/workflows/template-sync.yml
+[codecovWorkflow]: ./.github/workflows/validate-codecov.yml
+[codecovFile]: ./.github/codecov.yml
 [codeOwnFile]: ./.github/CODEOWNERS
 [copilotFile]: ./.github/copilot-instructions.md
 [dependabotFile]: ./.github/dependabot.yml
@@ -219,6 +225,7 @@ because most files need repo-specific customization.
 
 <!-- Public URIs (alphabetical by name) -->
 
+[codecov]: https://docs.codecov.com/docs/codecov-yaml
 [freeCodeCamp]: https://www.freecodecamp.org/news/how-to-use-the-dot-github-repository
 [ghComHealth]: https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file
 [ghCopilot]: https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot

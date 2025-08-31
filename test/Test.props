@@ -59,6 +59,7 @@
 
   <ItemGroup Label="Test Utilities">
     <!-- Use wildcard patch versions to reduce churn. Use latest (except pinned). -->
+    <PackageReference Include="JunitXml.TestLogger" Version="7.0.*" /> <!-- Used by Codecov -->
     <PackageReference Include="Moq" Version="4.20.*" />
     <PackageReference Include="Moq.AutoMock" Version="3.5.*" />
     <PackageReference Include="Shouldly" Version="4.3.*" />

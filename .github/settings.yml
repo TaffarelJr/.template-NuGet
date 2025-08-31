@@ -55,6 +55,10 @@ rulesets:
               integration_id: 15368 # GitHub Actions
             - context: Analyze (csharp)
               integration_id: 15368 # GitHub Actions
+            - context: codecov/patch
+              integration_id: 254 # Codecov
+            - context: codecov/project
+              integration_id: 254 # Codecov
       - type: code_scanning
         parameters:
           code_scanning_tools:
