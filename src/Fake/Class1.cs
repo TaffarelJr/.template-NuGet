@@ -27,9 +27,16 @@ namespace Fake
         /// </summary>
         public static bool Invert(bool value) => !value;
 
-        //// /// <summary>
-        //// /// Checks if the provided value is true.
-        //// /// </summary>
-        //// public static bool IsTrue(bool value) => value;
+        /// <summary>
+        /// Adds one to the provided value.
+        /// </summary>
+        /// <param name="value">The input value.</param>
+        /// <returns>The incremented value.</returns>
+        public static int Add(int value) => value + 1;
+
+        /// <summary>
+        /// Checks if the provided value is true.
+        /// </summary>
+        public static bool IsTrue(bool value) => value;
     }
 }
