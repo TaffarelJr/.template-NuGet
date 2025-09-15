@@ -27,6 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ISSUE_TEMPLATE", "ISSUE_TEM
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{C7A64F19-DF59-4B16-A9C9-5D317FCF26CD}"
 	ProjectSection(SolutionItems) = preProject
+		.github\workflows\continuous-integration.yml = .github\workflows\continuous-integration.yml
 		.github\workflows\template-sync.yml = .github\workflows\template-sync.yml
 		.github\workflows\validate-codecov.yml = .github\workflows\validate-codecov.yml
 	EndProjectSection
@@ -50,6 +51,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		CODE_OF_CONDUCT.md = CODE_OF_CONDUCT.md
 		Common.props = Common.props
 		CONTRIBUTING.md = CONTRIBUTING.md
+		GitVersion.yml = GitVersion.yml
 		global.json = global.json
 		Icon.png = Icon.png
 		Icon.svg = Icon.svg
@@ -75,6 +77,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{E5056391-6
 		test\.editorconfig = test\.editorconfig
 		test\Test.props = test\Test.props
 		test\Test.runsettings = test\Test.runsettings
+		test\TestHelpers.psm1 = test\TestHelpers.psm1
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Placeholder.Tests", "test\Placeholder.Tests\Placeholder.Tests.csproj", "{0AEDD51E-D879-4F43-80F4-A3F6E9DF2B06}"

@@ -1,5 +1,6 @@
 # NuGet Template Repository <!-- omit from toc -->
 
+[![Continuous Integration](https://github.com/TaffarelJr/.template-NuGet/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/TaffarelJr/.template-NuGet/actions/workflows/continuous-integration.yml)
 [![Codecov](https://codecov.io/gh/TaffarelJr/.template-NuGet/graph/badge.svg)](https://codecov.io/gh/TaffarelJr/.template-NuGet)
 
 This is a template repo that contains the default configuration
@@ -117,12 +118,13 @@ because most files need repo-specific customization.
 
 ### [GitHub Workflows][ghWorkflows]
 
-| Workflow                                                                          | Description                                               |
-| :-------------------------------------------------------------------------------- | :-------------------------------------------------------- |
-| 📁[.github/][githubFolder]                                                        |                                                           |
-| &nbsp;└─📁[workflows/][workflowFolder]                                            |                                                           |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─📄[Template Sync][syncWorkflow]       | Synchronizes files from a template repo to a derived repo |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─📄[Validate Codecov][codecovWorkflow] | Validates changes to [codecov.yml][codecovFile]           |
+| Workflow                                                                           | Description                                               |
+| :--------------------------------------------------------------------------------- | :-------------------------------------------------------- |
+| 📁[.github/][githubFolder]                                                         |                                                           |
+| &nbsp;└─📁[workflows/][workflowFolder]                                             |                                                           |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─📄[Continuous Integration][ciWorkflow] | Builds, tests, and packs the solution.                    |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─📄[Template Sync][syncWorkflow]        | Synchronizes files from a template repo to a derived repo |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─📄[Validate Codecov][codecovWorkflow]  | Validates changes to [codecov.yml][codecovFile]           |
 
 ### .NET Configuration
 
@@ -160,21 +162,25 @@ because most files need repo-specific customization.
 
 ### Other Files
 
-| File                                  | Description                                      |
-| :------------------------------------ | :----------------------------------------------- |
-| 📁[.vscode/][vsCodeFolder]            | Contains VSCode settings                         |
-| 📁[docs/][docsFolder]                 | Contains documentation                           |
-| 📄[\_checklist.md][checklistFile]     | New template repo checklist                      |
-| 📄[.editorconfig][editorConfigFile]   | [Styleguide rule definitions][styleguideFile]    |
-| 📄[.gitattributes][gitAttributesFile] | Built using [scaffolding][ghGitAttributes]       |
-| 📄[.gitignore][gitIgnoreFile]         | Built using [scaffolding][ghGitIgnore]           |
-| 📄[.gitmessage][gitMessageFile]       | [Commit message template][styleguideFile-commit] |
+| File                                         | Description                                             |
+| :------------------------------------------- | :------------------------------------------------------ |
+| 📁[.vscode/][vsCodeFolder]                   | Contains VSCode settings                                |
+| 📁[docs/][docsFolder]                        | Contains documentation                                  |
+| 📁[test/][testFolder]                        | Contains test code                                      |
+| &nbsp;└─📄[TestHelpers.psm1][testHelperFile] | Helper methods for [Continuous Integration][ciWorkflow] |
+| 📄[\_checklist.md][checklistFile]            | New template repo checklist                             |
+| 📄[.editorconfig][editorConfigFile]          | [Styleguide rule definitions][styleguideFile]           |
+| 📄[.gitattributes][gitAttributesFile]        | Built using [scaffolding][ghGitAttributes]              |
+| 📄[.gitignore][gitIgnoreFile]                | Built using [scaffolding][ghGitIgnore]                  |
+| 📄[.gitmessage][gitMessageFile]              | [Commit message template][styleguideFile-commit]        |
+| 📄[GitVersion.yml][gitVersionFile]           | [GitVersion configuration][gitVersion]                  |
 
 <!-- Source Code URIs (alphabetical by file hierarchy) -->
 
 [githubFolder]: ./.github/
 [issueFormsFolder]: ./.github/ISSUE_TEMPLATE/
 [workflowFolder]: ./.github/workflows/
+[ciWorkflow]: ./.github/workflows/continuous-integration.yml
 [syncWorkflow]: ./.github/workflows/template-sync.yml
 [codecovWorkflow]: ./.github/workflows/validate-codecov.yml
 [codecovFile]: ./.github/codecov.yml
@@ -194,6 +200,7 @@ because most files need repo-specific customization.
 [testEditorConfigFile]: ./test/.editorconfig
 [testPropsFile]: ./test/Test.props
 [testRunsettingsFile]: ./test/Test.runsettings
+[testHelperFile]: ./test/TestHelpers.psm1
 [checklistFile]: ./_checklist.md
 [editorConfigFile]: ./.editorconfig
 [gitAttributesFile]: ./.gitattributes
@@ -205,6 +212,7 @@ because most files need repo-specific customization.
 [cocFile]: ./CODE_OF_CONDUCT.md
 [commonPropsFile]: ./Common.props
 [contribFile]: ./CONTRIBUTING.md
+[gitVersionFile]: ./GitVersion.yml
 [globalJsonFile]: ./global.json
 [iconFile]: ./Icon.png
 [iconSourceFile]: ./Icon.svg
@@ -235,3 +243,4 @@ because most files need repo-specific customization.
 [ghPRTemplate]: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/creating-a-pull-request-template-for-your-repository
 [ghTemplates]: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository
 [ghWorkflows]: https://docs.github.com/en/actions/how-tos/writing-workflows
+[gitVersion]: https://gitversion.net/docs/reference/configuration
