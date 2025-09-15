@@ -1,0 +1,13 @@
+# Every commit increments the version number
+workflow: TrunkBased/preview1
+
+# Override the default bump messages to support Conventional Commits
+# https://www.conventionalcommits.org
+major-version-bump-message: "(^\\s*(.*?)(\\s*\\(.*?\\))?\\s*!\\s*:|\\n[Bb][Rr][Ee][Aa][Kk][Ii][Nn][Gg](\\s*[Cc][Hh][Aa][Nn][Gg][Ee][Ss]?\\s*:)?)"
+minor-version-bump-message: "^\\s*(feat)(\\s*\\(.*?\\))?\\s*:"
+patch-version-bump-message: "^\\s*(build|chore|ci|docs|fix|infra|perf|refactor|revert|style|test)(\\s*\\(.*?\\))?\\s*:"
+
+# Ignore merge commits when calculating the version number
+# https://github.com/GitTools/GitVersion/issues/4056
+# https://github.com/GitTools/GitVersion/issues/4394
+track-merge-message: false
