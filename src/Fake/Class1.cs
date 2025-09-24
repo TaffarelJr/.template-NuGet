@@ -6,17 +6,28 @@ namespace Fake
     public static class Class1
     {
         /// <summary>
-        /// Performs a calculation on the provided value.
+        /// Calculates the power of a given integer based on the target framework.
         /// </summary>
         /// <param name="value">The input value.</param>
-        /// <returns>The calculated result.</returns>
-        public static int Calculate(int value)
+        /// <returns>The calculated power.</returns>
+        public static int Power(int value)
         {
 #if NETSTANDARD2_0
             return value * 2;
 #elif NET9_0
             return value * 3;
 #endif
+        }
+
+        /// <summary>
+        /// Adds two integers and returns the result.
+        /// </summary>
+        /// <param name="a">The first integer.</param>
+        /// <param name="b">The second integer.</param>
+        /// <returns>The sum of the two integers.</returns>
+        public static int Add(int a, int b)
+        {
+            return a + b;
         }
     }
 }

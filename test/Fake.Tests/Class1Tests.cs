@@ -17,7 +17,7 @@ namespace Fake
         public void TestCompilerSwitches_OnAttributes(int given, int expected)
         {
             // Act
-            var result = Class1.Calculate(given);
+            var result = Class1.Power(given);
 
             // Assert
             Assert.Equal(expected, result);
@@ -27,29 +27,29 @@ namespace Fake
         public void TestCompilerSwitches_OnCode()
         {
 #if NET462
-            Assert.Equal(2, Class1.Calculate(1));
+            Assert.Equal(2, Class1.Power(1));
 #elif NET47
-            Assert.Equal(2, Class1.Calculate(1));
+            Assert.Equal(2, Class1.Power(1));
 #elif NET471
-            Assert.Equal(2, Class1.Calculate(1));
+            Assert.Equal(2, Class1.Power(1));
 #elif NET472
-            Assert.Equal(2, Class1.Calculate(1));
+            Assert.Equal(2, Class1.Power(1));
 #elif NET48
-            Assert.Equal(2, Class1.Calculate(1));
+            Assert.Equal(2, Class1.Power(1));
 #elif NET481
-            Assert.Equal(2, Class1.Calculate(1));
+            Assert.Equal(2, Class1.Power(1));
 #elif NETCOREAPP3_1
-            Assert.Equal(2, Class1.Calculate(1));
+            Assert.Equal(2, Class1.Power(1));
 #elif NET5_0
-            Assert.Equal(2, Class1.Calculate(1));
+            Assert.Equal(2, Class1.Power(1));
 #elif NET6_0
-            Assert.Equal(2, Class1.Calculate(1));
+            Assert.Equal(2, Class1.Power(1));
 #elif NET7_0
-            Assert.Equal(2, Class1.Calculate(1));
+            Assert.Equal(2, Class1.Power(1));
 #elif NET8_0
-            Assert.Equal(2, Class1.Calculate(1));
+            Assert.Equal(2, Class1.Power(1));
 #elif NET9_0
-            Assert.Equal(3, Class1.Calculate(1));
+            Assert.Equal(3, Class1.Power(1));
 #endif
         }
     }
