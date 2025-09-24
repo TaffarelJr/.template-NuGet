@@ -64,7 +64,7 @@ component_management:
 #───────────────────────────────────────────────────────────────────────────────
 
 comment:
-  layout: header,flags,condensed_header # ,reach,diff,components,condensed_files,files,footer,condensed_footer
+  layout: header,flags,files,condensed_header # ,reach,diff,components,condensed_files,footer,condensed_footer
   behavior: default
   require_changes: false
   require_base: false
