@@ -47,7 +47,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           cache: true # Cache NuGet packages
           cache-dependency-path: |
@@ -180,7 +180,7 @@ jobs:
 #           path: nuget-packages
 
 #       - name: Setup .NET
-#         uses: actions/setup-dotnet@v4
+#         uses: actions/setup-dotnet@v5
 
 #       - name: Generate release notes
 #         id: release-notes
