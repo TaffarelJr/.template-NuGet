@@ -11,8 +11,12 @@ on:
 
 jobs:
   validate:
-    name: Validate codecov.yml
+    name: Validate `codecov.yml`
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
 
     # https://docs.github.com/en/actions/using-jobs/assigning-permissions-to-jobs
     permissions:
@@ -30,6 +34,7 @@ jobs:
           STATUS=$?
 
           echo "$OUTPUT"
+          echo
 
           if [ $STATUS -eq 0 ]; then
             echo "✅ codecov.yml is valid"
