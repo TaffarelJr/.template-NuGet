@@ -149,6 +149,8 @@ jobs:
           --no-restore
           --no-build
           --configuration Release
+          -p:Version=${{ steps.version.outputs.semVer }}
+          -p:PackageVersion=${{ steps.version.outputs.semVer }}
           -p:RepositoryBranch=${{ github.ref_name }}
           -p:PackageProjectUrl='${{ github.server_url }}/${{ github.repository }}'
 
