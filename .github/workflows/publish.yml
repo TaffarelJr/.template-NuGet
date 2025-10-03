@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: Publish Package
+
+on:
+  # Triggered when a pull request is merged
+  push:
+    branches:
+      - main
+
+  # Can be triggered manually
+  workflow_dispatch:
+
+jobs:
+  build-test-pack:
+    name: Build, Test, and Pack
+    uses: ./.github/workflows/continuous-integration.yml
+    secrets: inherit
+
+  publish:
+    name: Publish Candidate NuGet Package
+    needs: build-test-pack
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+
+    # https://docs.github.com/en/actions/using-jobs/assigning-permissions-to-jobs
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: package
+          path: ./package
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "9.x"
+          source-url: https://nuget.pkg.github.com/TaffarelJr/index.json
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish NuGet packages
+        run: dotnet nuget push "./package/*.*nupkg" --skip-duplicate

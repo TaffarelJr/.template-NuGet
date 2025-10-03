@@ -1,31 +1,31 @@
 name: Continuous Integration
 
 on:
-  push:
-    branches: [main]
-
   # Triggered on pull requests
   pull_request:
     branches: [main]
 
+  # Can be called by other workflows
+  workflow_call:
+    outputs:
+      version:
+        description: "The version number of the package that was built"
+        value: ${{ jobs.build-test-pack.outputs.version }}
+
   # Can be triggered manually
   workflow_dispatch:
-# inputs:
-#   publish:
-#     description: "Publish NuGet package"
-#     type: boolean
-#     default: false
 
 jobs:
-  build-and-test:
+  build-test-pack:
     name: Build and Test
     runs-on: windows-latest # Needed to support .NET Framework
-    timeout-minutes: 15
+
     defaults:
       run:
         shell: pwsh
-    #     outputs:
-    #       version: ${{ steps.version.outputs.semVer }}
+
+    outputs:
+      version: ${{ steps.version.outputs.semVer }}
 
     # https://docs.github.com/en/actions/using-jobs/assigning-permissions-to-jobs
     permissions:
@@ -36,6 +36,7 @@ jobs:
       DEPENDABOT_USERNAME: dependabot[bot]
       DEPENDABOT_EMAIL: 49699333+dependabot[bot]@users.noreply.github.com
       DEPENDABOT_AUTHOR: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+
     steps:
       #─────────────────────────────────────────────────────────────────────────
       # Prepare Environment
@@ -154,14 +155,16 @@ jobs:
           -p:RepositoryBranch=${{ github.ref_name }}
           -p:PackageProjectUrl='${{ github.server_url }}/${{ github.repository }}'
 
-#           -p:PackageReleaseNotes='${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ steps.version.outputs.semVer }}'
+      # -p:PackageReleaseNotes='${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ steps.version.outputs.semVer }}'
 
-#       - name: Upload NuGet package artifacts
-#         uses: actions/upload-artifact@v4
-#         with:
-#           name: nuget-packages
-#           path: src/**/*.nupkg
-#           retention-days: 7
+      - name: Upload NuGet package
+        uses: actions/upload-artifact@v4
+        with:
+          name: package
+          path: |
+            src/**/*.nupkg
+            src/**/*.snupkg
+          retention-days: 7
 
 #   publish:
 #     name: Publish NuGet Package
