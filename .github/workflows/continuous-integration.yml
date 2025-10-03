@@ -131,22 +131,27 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: |
           Import-Module '.\test\TestHelpers.psm1' -Force
-          $null = Get-TestProjects | Get-TestRuns | Write-TestHeader `
-          | Invoke-DotnetTest | Publish-TestCoverage | Publish-TestResults
+          $null = Get-TestProjects `
+                | Get-TestRuns `
+                | Write-TestHeader `
+                | Invoke-DotnetTest `
+                | Publish-TestCoverage `
+                | Publish-TestResults
 
       #─────────────────────────────────────────────────────────────────────────
       # Build NuGet Package
       #─────────────────────────────────────────────────────────────────────────
 
-#       - name: Build NuGet package
-#         run: >
-#           dotnet pack
-#           --nologo
-#           --no-restore
-#           --no-build
-#           --configuration Release
-#           -p:RepositoryBranch=${{ github.ref_name }}
-#           -p:PackageProjectUrl='${{ github.server_url }}/${{ github.repository }}'
+      - name: Build NuGet package
+        run: >
+          dotnet pack
+          --nologo
+          --no-restore
+          --no-build
+          --configuration Release
+          -p:RepositoryBranch=${{ github.ref_name }}
+          -p:PackageProjectUrl='${{ github.server_url }}/${{ github.repository }}'
+
 #           -p:PackageReleaseNotes='${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ steps.version.outputs.semVer }}'
 
 #       - name: Upload NuGet package artifacts
