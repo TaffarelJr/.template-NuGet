@@ -14,7 +14,7 @@
     <Copyright>Copyright © $([System.DateTime]::Now.Year) RJ Hollberg. All rights reserved.</Copyright>
     <Description></Description>
     <IsPackable>true</IsPackable>
-    <PackageIcon>Icon.svg</PackageIcon>
+    <PackageIcon>Icon.png</PackageIcon>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>$(PackageTags)</PackageTags>
@@ -65,7 +65,7 @@
   └───────────────────────────────────────────────────────────────────────── -->
 
   <ItemGroup Label="NuGet Package Files">
-    <None Include="$(MSBuildThisFileDirectory)..\Icon.svg" Link="Icon.svg" Pack="true" PackagePath="" />
+    <None Include="$(MSBuildThisFileDirectory)..\Icon.png" Link="Icon.png" Pack="true" PackagePath="" />
     <None Include="$(MSBuildThisFileDirectory)..\LICENSE" Link="LICENSE" Pack="true" PackagePath="" />
     <None Include="$(MSBuildThisFileDirectory)..\README.md" Link="README.md" Pack="true" PackagePath="" />
   </ItemGroup>
