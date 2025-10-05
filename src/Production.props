@@ -14,7 +14,7 @@
     <Copyright>Copyright © $([System.DateTime]::Now.Year) RJ Hollberg. All rights reserved.</Copyright>
     <Description></Description>
     <IsPackable>true</IsPackable>
-    <PackageIcon>Icon.png</PackageIcon>
+    <PackageIcon>Icon.svg</PackageIcon>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>$(PackageTags)</PackageTags>
