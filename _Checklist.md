@@ -164,6 +164,9 @@ Finally, validate the template sync.
 To do this, go to `Actions` → `Template Sync` → `Run workflow` → `main`
 and click `Run workflow`. The process should complete with no changes.
 
+Nuget icon should be SVG (or PNG), 128x128.
+Good source: https://www.iconfinder.com/
+
 <!-- Source Code URIs -->
 
 [sync]: .github/workflows/template-sync.yml
