@@ -93,7 +93,8 @@ to meet the needs of the new repo:
 
 - Replace the contents of the `README.md` file
 - Add any additional ecosystems to `dependabot.yml`
-- Add a package icon as `Icon.png`
+- Add a package icon as `Icon.svg` (or `.png` if necessary, 128x128)
+  - Good source: https://www.iconfinder.com/
 - Make any additional changes to the root files as necessary.
 - Commit the changes with the message: `chore: customize root files`
 
@@ -163,9 +164,6 @@ verify that the repo description and tags appear on the home page.
 Finally, validate the template sync.
 To do this, go to `Actions` → `Template Sync` → `Run workflow` → `main`
 and click `Run workflow`. The process should complete with no changes.
-
-Nuget icon should be SVG (or PNG), 128x128.
-Good source: https://www.iconfinder.com/
 
 <!-- Source Code URIs -->
 
