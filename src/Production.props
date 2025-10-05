@@ -65,7 +65,7 @@
   └───────────────────────────────────────────────────────────────────────── -->
 
   <ItemGroup Label="NuGet Package Files">
-    <None Include="$(MSBuildThisFileDirectory)..\Icon.png" Link="Icon.png" Pack="true" PackagePath="" />
+    <None Include="$(MSBuildThisFileDirectory)..\Icon.svg" Link="Icon.svg" Pack="true" PackagePath="" />
     <None Include="$(MSBuildThisFileDirectory)..\LICENSE" Link="LICENSE" Pack="true" PackagePath="" />
     <None Include="$(MSBuildThisFileDirectory)..\README.md" Link="README.md" Pack="true" PackagePath="" />
   </ItemGroup>
