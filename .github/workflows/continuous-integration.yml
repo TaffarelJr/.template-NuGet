@@ -150,6 +150,7 @@ jobs:
           --no-restore
           --no-build
           --configuration Release
+          --output publish
           -p:Version=${{ steps.version.outputs.semVer }}
           -p:PackageVersion=${{ steps.version.outputs.semVer }}
           -p:RepositoryBranch=${{ github.ref_name }}
@@ -161,9 +162,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: package
-          path: |
-            src/**/*.nupkg
-            src/**/*.snupkg
+          path: publish
           retention-days: 7
 
 #   publish:
