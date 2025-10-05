@@ -93,7 +93,8 @@ to meet the needs of the new repo:
 
 - Replace the contents of the `README.md` file
 - Add any additional ecosystems to `dependabot.yml`
-- Add a package icon as `Icon.svg` (or `.png` if necessary, 128x128)
+- Add a package icon as `Icon.png`, 128x128
+  - Include original SVG, if there is one
   - Good source: https://www.iconfinder.com/
 - Make any additional changes to the root files as necessary.
 - Commit the changes with the message: `chore: customize root files`
