@@ -32,7 +32,7 @@
 
   <ItemGroup Label="Test Platform">
     <!-- Use wildcard patch versions to reduce churn. Use latest (except pinned). -->
-    <PackageReference Include="JunitXml.TestLogger" Version="6.1.*" /> <!-- Used by Codecov -->
+    <PackageReference Include="JunitXml.TestLogger" Version="7.0.1" /> <!-- Used by Codecov -->
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.*" Condition="'$(TargetFramework)'=='net462'" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.*" Condition="'$(TargetFramework)'=='net47'" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.*" Condition="'$(TargetFramework)'=='net471'" />
