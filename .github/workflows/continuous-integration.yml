@@ -27,7 +27,6 @@ jobs:
     outputs:
       version: ${{ steps.version.outputs.semVer }}
 
-    # https://docs.github.com/en/actions/using-jobs/assigning-permissions-to-jobs
     permissions:
       contents: write # Needed for Dependabot to push changes
       pull-requests: write # Needed for Codecov to report test coverage
