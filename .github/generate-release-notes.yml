@@ -1,3 +1,6 @@
+name: Release Notes Generator
+description: Transforms technical changelogs into user-friendly release notes
+model: openai/gpt-4o-mini
 messages:
   - role: system
     content: |
@@ -26,5 +29,3 @@ messages:
 
       Format the output as Markdown suitable for a GitHub Release.
       Include a brief summary at the top if there are significant changes.
-
-model: openai/gpt-4o-mini
