@@ -31,11 +31,10 @@ param(
 # Configuration
 #───────────────────────────────────────────────────────────────────────────────
 
-# Define the output file and make sure it doesn't exist
-$filename = 'Changelog.md'
-if (Test-Path $filename) {
-    Remove-Item $filename -Force
-}
+# Define the output file and make sure it's empty
+$filename = 'publish\changelog.md'
+if (Test-Path $filename) { Remove-Item $filename -Force }
+New-Item -Path $filename -ItemType File -Force | Out-Null
 
 # This defines the Conventional Commit categories (and their display names)
 # along with the order in which they will appear in the changelog
