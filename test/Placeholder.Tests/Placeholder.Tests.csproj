@@ -6,7 +6,7 @@
 
   <PropertyGroup Label="General Settings">
     <TargetFrameworks>net462;net47;net471;net472;net48;net481;netcoreapp3.1;net5.0;net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
-    <RootNamespace>Fake</RootNamespace>
+    <RootNamespace>Placeholder</RootNamespace>
   </PropertyGroup>
 
   <!-- ─────────────────────────────────────────────────────────────────────────
@@ -23,7 +23,7 @@
   └───────────────────────────────────────────────────────────────────────── -->
 
   <ItemGroup Label="Code Under Test">
-    <ProjectReference Include="$(MSBuildProjectDirectory)\..\..\src\Fake\Fake.csproj" />
+    <ProjectReference Include="$(MSBuildProjectDirectory)\..\..\src\Placeholder\Placeholder.csproj" />
   </ItemGroup>
 
   <!-- ─────────────────────────────────────────────────────────────────────────

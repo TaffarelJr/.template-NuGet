@@ -1,4 +1,4 @@
-namespace Fake
+namespace Placeholder
 {
     /// <summary>
     /// Represents a class with no specific functionality.

@@ -60,7 +60,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D
 		src\Production.props = src\Production.props
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fake", "src\Fake\Fake.csproj", "{480242FD-3FE7-4E71-9A1F-0FC446F1D20B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Placeholder", "src\Placeholder\Placeholder.csproj", "{480242FD-3FE7-4E71-9A1F-0FC446F1D20B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{E5056391-64A9-4E23-B6F7-9596973E2D46}"
 	ProjectSection(SolutionItems) = preProject
@@ -70,7 +70,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{E5056391-6
 		test\TestHelpers.psm1 = test\TestHelpers.psm1
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fake.Tests", "test\Fake.Tests\Fake.Tests.csproj", "{0AEDD51E-D879-4F43-80F4-A3F6E9DF2B06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Placeholder.Tests", "test\Placeholder.Tests\Placeholder.Tests.csproj", "{0AEDD51E-D879-4F43-80F4-A3F6E9DF2B06}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
