@@ -142,6 +142,22 @@ jobs:
       # Build NuGet Package
       #─────────────────────────────────────────────────────────────────────────
 
+      - name: Generate changelog
+        run: .\.github\generate-changelog.ps1
+
+      - name: Extract release notes
+        id: release-notes
+        uses: actions/ai-inference@v2
+        with:
+          prompt-file: .github\generate-release-notes.yml
+          file_input: |
+            changelog: .github\changelog.md
+
+      - name: Save release notes
+        run: |
+          New-Item -Path "publish\release-notes.md" -ItemType File -Force | Out-Null
+          Set-Content -Path "publish\release-notes.md" -Value '${{ steps.release-notes.outputs.response }}'
+
       - name: Build NuGet package
         run: >
           dotnet pack
@@ -154,8 +170,7 @@ jobs:
           -p:PackageVersion=${{ steps.version.outputs.semVer }}
           -p:RepositoryBranch=${{ github.ref_name }}
           -p:PackageProjectUrl='${{ github.server_url }}/${{ github.repository }}'
-
-      # -p:PackageReleaseNotes='${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ steps.version.outputs.semVer }}'
+          -p:PackageReleaseNotes='${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ steps.version.outputs.semVer }}'
 
       - name: Upload NuGet package
         uses: actions/upload-artifact@v4
