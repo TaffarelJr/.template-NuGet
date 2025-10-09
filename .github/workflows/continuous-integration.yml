@@ -152,7 +152,7 @@ jobs:
         with:
           prompt-file: .github\generate-release-notes.yml
           file_input: |
-            changelog: .github\changelog.md
+            changelog: publish\changelog.md
 
       - name: Save release notes
         run: |
