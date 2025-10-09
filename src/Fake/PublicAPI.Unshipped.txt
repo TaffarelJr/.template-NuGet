@@ -1,4 +1,0 @@
-Fake.Class1
-static Fake.Class1.Add(int a, int b) -> int
-static Fake.Class1.Power(int value) -> int
-static Fake.Class1.Subtract(int a, int b) -> int

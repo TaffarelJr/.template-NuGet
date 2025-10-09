@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace Fake
+namespace Placeholder
 {
     public class Class1Tests
     {
