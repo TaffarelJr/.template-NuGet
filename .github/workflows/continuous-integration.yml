@@ -144,14 +144,14 @@ jobs:
       #─────────────────────────────────────────────────────────────────────────
 
       - name: Generate changelog
-        run: .\.github\generate-changelog.ps1
+        run: .github\generate-changelog.ps1
 
       - name: Extract release notes
         id: release-notes
         uses: actions/ai-inference@v2
         with:
           prompt-file: .github\generate-release-notes.yml
-          file_input: |
+          file_input:
             changelog: .github\changelog.md
 
       - name: Save release notes
