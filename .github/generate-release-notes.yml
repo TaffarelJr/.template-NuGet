@@ -27,4 +27,4 @@ messages:
       Format the output as Markdown suitable for a GitHub Release.
       Include a brief summary at the top if there are significant changes.
 
-model: openai/gpt-4o
+model: openai/gpt-5-mini
