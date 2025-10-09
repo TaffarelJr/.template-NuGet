@@ -28,8 +28,9 @@ jobs:
       version: ${{ steps.version.outputs.semVer }}
 
     permissions:
-      contents: write # Needed for Dependabot to push changes
-      pull-requests: write # Needed for Codecov to report test coverage
+      contents: write
+      pull-requests: write
+      models: read
 
     env:
       DEPENDABOT_USERNAME: dependabot[bot]
@@ -178,7 +179,6 @@ jobs:
           name: package
           path: publish
           retention-days: 7
-
 #   publish:
 #     name: Publish NuGet Package
 #     needs: build-and-test
