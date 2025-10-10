@@ -150,9 +150,9 @@ jobs:
         id: release-notes
         uses: actions/ai-inference@v2
         with:
-          prompt-file: ./.github/generate-release-notes.yml
+          prompt-file: .github/generate-release-notes.prompt.yml
           file_input: |
-            changelog: ./publish/changelog.md
+            changelog: publish/changelog.md
 
       - name: Save release notes
         run: |
