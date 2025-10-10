@@ -8,33 +8,26 @@
     This script generates a Markdown file that contains the commit history
     since the last release tag (on the current branch).
 
+.PARAMETER OutputPath
+    (Optional) The path for the output changelog file.
+    If not specified, defaults to 'changelog.md'.
+
 .PARAMETER FromVersion
     (Optional) A specific release tag.
     If given, the script will generate commit history
     starting from this tag instead.
-
-.EXAMPLE
-    .\generate-changelog.ps1
-    Generates commit history from the most recent release tag.
-
-.EXAMPLE
-    .\generate-changelog.ps1 -FromVersion "v1.2.3"
-    Generates commit history starting from version v1.2.3.
 #>
 
 [CmdletBinding()]
 param(
+    [string]$OutputPath,
+
     [string]$FromVersion
 )
 
 #───────────────────────────────────────────────────────────────────────────────
 # Configuration
 #───────────────────────────────────────────────────────────────────────────────
-
-# Define the output file and make sure it's empty
-$filename = 'publish\changelog.md'
-if (Test-Path $filename) { Remove-Item $filename -Force }
-New-Item -Path $filename -ItemType File -Force | Out-Null
 
 # This defines the Conventional Commit categories (and their display names)
 # along with the order in which they will appear in the changelog
@@ -319,12 +312,12 @@ function Write-CommitToChangelog {
             $suffix = ' 💥'
         }
 
-        Add-Content -Path $filename -Value "- $prefix$scope$($Commit.Description)$suffix"
+        Add-Content -Path $OutputPath -Value "- $prefix$scope$($Commit.Description)$suffix"
 
         if ($Commit.Body) {
             $Commit.Body -split '`n' `
             | ForEach-Object {
-                Add-Content -Path $filename -Value "  > $($_.Trim())  "
+                Add-Content -Path $OutputPath -Value "  > $($_.Trim())  "
             }
         }
     }
@@ -347,16 +340,36 @@ function Write-CategoryToChangeLog {
     $titleWithCount = "$($Category.Value) ($($Commits.Count))"
     Write-Host "    $titleWithCount"
 
-    Add-Content -Path $filename -Value "## $titleWithCount"
-    Add-Content -Path $filename -Value ''
+    Add-Content -Path $OutputPath -Value "## $titleWithCount"
+    Add-Content -Path $OutputPath -Value ''
 
     if ($Category.Key -eq 'break') {
-        Add-Content -Path $filename -Value '_(Aggregated from the other categories below.)_'
-        Add-Content -Path $filename -Value ''
+        Add-Content -Path $OutputPath -Value '_(Aggregated from the other categories below.)_'
+        Add-Content -Path $OutputPath -Value ''
     }
 
     $Commits | Write-CommitToChangelog -Category $Category
-    Add-Content -Path $filename -Value ''
+    Add-Content -Path $OutputPath -Value ''
+}
+
+# Converts a markdown file to YAML-safe text format.
+function ConvertTo-YamlSafeText {
+    param(
+        [Parameter(Mandatory)]
+        [string]$MarkdownPath,
+
+        [Parameter(Mandatory)]
+        [string]$SafePath
+    )
+
+    if (Test-Path $SafePath) { Remove-Item $SafePath -Force }
+    New-Item -Path $SafePath -ItemType File -Force | Out-Null
+
+    $content = Get-Content -Path $MarkdownPath -Raw
+    $content = $content -replace '^(\s*)-', '  •'  # Replace markdown list markers with bullets
+    $content = $content -replace '^(\s*)##', '  **'  # Replace markdown headers
+    $content = $content -replace '`', "'"  # Replace backticks with single quotes
+    Set-Content -Path $SafePath -Value $content -Encoding UTF8
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -364,6 +377,10 @@ function Write-CategoryToChangeLog {
 #───────────────────────────────────────────────────────────────────────────────
 
 'PSSemVer' | Install-RequiredModule
+
+if (-not $OutputPath) { $OutputPath = 'changelog.md' }
+if (Test-Path $OutputPath) { Remove-Item $OutputPath -Force }
+New-Item -Path $OutputPath -ItemType File -Force | Out-Null
 
 $currentSha = git rev-parse HEAD
 $baseline = Get-BaselineCommit $currentSha
@@ -396,4 +413,5 @@ if ($mergeCommits -and $mergeCommits.Count -gt 0) {
     Write-CategoryToChangeLog $mergeCategory $mergeCommits
 }
 
-Write-Host "Changelog generated successfully: $filename"
+ConvertTo-YamlSafeText -InputPath $OutputPath -OutputPath 'changelog.safe.txt'
+Write-Host "Changelog generated successfully: $OutputPath"

@@ -144,7 +144,7 @@ jobs:
       #─────────────────────────────────────────────────────────────────────────
 
       - name: Generate changelog
-        run: .github/generate-changelog.ps1
+        run: .github/generate-changelog.ps1 -OutputPath publish/changelog.md
 
       - name: Extract release notes
         id: release-notes
@@ -152,7 +152,7 @@ jobs:
         with:
           prompt-file: .github/generate-release-notes.prompt.yml
           file_input: |
-            changelog: publish/changelog.md
+            changelog: changelog.safe.txt
 
       - name: Save release notes
         run: |

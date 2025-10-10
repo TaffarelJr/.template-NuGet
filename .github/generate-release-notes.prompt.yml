@@ -24,9 +24,7 @@ messages:
     content: |
       Please create user-friendly release notes from this changelog:
 
-      ```
       {{changelog}}
-      ```
 
       Format the output as Markdown suitable for a GitHub Release.
       Include a brief summary at the top if there are significant changes.
