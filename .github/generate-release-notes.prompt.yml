@@ -1,6 +1,5 @@
-name: Release Notes Generator
-description: Transforms technical changelogs into user-friendly release notes
 model: openai/gpt-4o-mini
+
 messages:
   - role: system
     content: |
