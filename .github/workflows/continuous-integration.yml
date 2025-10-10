@@ -97,7 +97,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v6
         with:
           commit_message: ${{ steps.last-commit.outputs.message }}
-          file_pattern: src\*\packages.lock.json
+          file_pattern: src/*/packages.lock.json
           commit_options: --amend --no-edit
           push_options: --force
           commit_author: ${{ env.DEPENDABOT_AUTHOR }}
@@ -131,7 +131,7 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: |
-          Import-Module '.\test\TestHelpers.psm1' -Force
+          Import-Module './test/TestHelpers.psm1' -Force
           $null = Get-TestProjects `
                 | Get-TestRuns `
                 | Write-TestHeader `
@@ -144,7 +144,7 @@ jobs:
       #─────────────────────────────────────────────────────────────────────────
 
       - name: Generate changelog
-        run: .github\generate-changelog.ps1
+        run: .github/generate-changelog.ps1
 
       - name: Extract release notes
         id: release-notes
@@ -156,8 +156,8 @@ jobs:
 
       - name: Save release notes
         run: |
-          New-Item -Path "publish\release-notes.md" -ItemType File -Force | Out-Null
-          Set-Content -Path "publish\release-notes.md" -Value '${{ steps.release-notes.outputs.response }}'
+          New-Item -Path "publish/release-notes.md" -ItemType File -Force | Out-Null
+          Set-Content -Path "publish/release-notes.md" -Value '${{ steps.release-notes.outputs.response }}'
 
       - name: Build NuGet package
         run: >
