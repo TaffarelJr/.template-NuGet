@@ -413,5 +413,5 @@ if ($mergeCommits -and $mergeCommits.Count -gt 0) {
     Write-CategoryToChangeLog $mergeCategory $mergeCommits
 }
 
-ConvertTo-YamlSafeText -InputPath $OutputPath -OutputPath 'changelog.safe.txt'
+ConvertTo-YamlSafeText -MarkdownPath $OutputPath -SafePath 'changelog.safe.txt'
 Write-Host "Changelog generated successfully: $OutputPath"
