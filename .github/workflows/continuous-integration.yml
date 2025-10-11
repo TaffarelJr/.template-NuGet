@@ -28,9 +28,9 @@ jobs:
       version: ${{ steps.version.outputs.semVer }}
 
     permissions:
-      contents: write
-      pull-requests: write
-      models: read
+      contents: write # Needed to push changes (Dependabot)
+      pull-requests: write # Needed to create PRs (Dependabot)
+      models: read # Needed to call GitHub Models
 
     env:
       DEPENDABOT_USERNAME: dependabot[bot]
@@ -157,8 +157,8 @@ jobs:
       - name: Save release notes
         run: |
           Remove-Item -Path 'publish/changelog.safe.txt' -Force
-          New-Item -Path 'publish/release-notes.md' -ItemType File -Force | Out-Null
-          Set-Content -Path 'publish/release-notes.md' -Value '${{ steps.release-notes.outputs.response }}'
+          Move-Item -Path '${{ steps.release-notes.outputs.response-file }}' `
+                    -Destination 'publish/release-notes.md' -Force
 
       - name: Build NuGet package
         run: >
