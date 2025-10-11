@@ -4,6 +4,7 @@ description: Transforms technical changelogs into user-friendly release notes
 model: openai/gpt-4o-mini
 modelParameters:
   temperature: 0.5
+  maxTokens: 4000
 
 system-prompt: |
   You are a technical writer specializing in creating user-friendly release notes for .NET NuGet packages.
