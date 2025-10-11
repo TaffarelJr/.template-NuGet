@@ -151,6 +151,7 @@ jobs:
         uses: actions/ai-inference@v2
         with:
           prompt-file: .github/generate-release-notes.prompt.yml
+          max-tokens: 4000
 
       - name: Save release notes
         run: |
