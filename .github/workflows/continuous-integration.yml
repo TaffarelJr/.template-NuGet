@@ -152,12 +152,13 @@ jobs:
         with:
           prompt-file: .github/generate-release-notes.prompt.yml
           file_input: |
-            changelog: changelog.safe.txt
+            changelog: publish/changelog.safe.txt
 
       - name: Save release notes
         run: |
-          New-Item -Path "publish/release-notes.md" -ItemType File -Force | Out-Null
-          Set-Content -Path "publish/release-notes.md" -Value '${{ steps.release-notes.outputs.response }}'
+          Remove-Item -Path 'publish/changelog.safe.txt' -Force
+          New-Item -Path 'publish/release-notes.md' -ItemType File -Force | Out-Null
+          Set-Content -Path 'publish/release-notes.md' -Value '${{ steps.release-notes.outputs.response }}'
 
       - name: Build NuGet package
         run: >
