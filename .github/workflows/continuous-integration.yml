@@ -151,13 +151,14 @@ jobs:
         uses: actions/ai-inference@v2
         with:
           prompt-file: .github/generate-release-notes.prompt.yml
+          model: openai/gpt-4o-mini
           max-tokens: 4000
 
       - name: Save release notes
         run: |
           Remove-Item -Path 'publish/changelog.safe.txt' -Force
-          Move-Item -Path '${{ steps.release-notes.outputs.response-file }}' `
-                    -Destination 'publish/release-notes.md' -Force
+          New-Item -Path 'publish/release-notes.md' -ItemType File -Force | Out-Null
+          Set-Content -Path 'publish/release-notes.md' -Value '${{ steps.release-notes.outputs.response }}'
 
       - name: Build NuGet package
         run: >

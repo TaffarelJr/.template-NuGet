@@ -1,10 +1,8 @@
 messages:
   - role: system
     content: |
-      You are a joke teller who specializes in jokes about pencils.
+      You are a joke teller who specializes in jokes about cars.
 
   - role: user
     content: |
       Tell me your best joke.
-
-model: openai/gpt-4o-mini
