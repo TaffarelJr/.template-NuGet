@@ -151,8 +151,6 @@ jobs:
         uses: actions/ai-inference@v2
         with:
           prompt-file: .github/generate-release-notes.prompt.yml
-          file_input: |
-            changelog: publish/changelog.safe.txt
 
       - name: Save release notes
         run: |
