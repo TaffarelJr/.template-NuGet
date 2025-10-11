@@ -18,8 +18,11 @@ messages:
       - Use clear, non-technical language when possible
       - Focus on user impact, not implementation details
       - Keep it concise but informative
-      - Output Markdown suitable for a GitHub Release
-      - Use bullet points for readability
+      - Generate Markdown suitable for a GitHub Release
+      - Don't include any header or footer text, only generate the release notes content
+      - Don't mention any version numbers, unless it's applicable to the release notes
+      - Don't include empty categories
+      - Use bullet points where necessary for readability
       - Omit internal/infrastructure changes unless they affect users
 
   - role: user

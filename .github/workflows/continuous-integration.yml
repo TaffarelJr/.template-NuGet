@@ -160,8 +160,8 @@ jobs:
       - name: Save release notes
         run: |
           Remove-Item -Path 'publish/changelog.safe.txt' -Force
-          New-Item -Path 'publish/release-notes.md' -ItemType File -Force | Out-Null
-          Set-Content -Path 'publish/release-notes.md' -Value '${{ steps.release-notes.outputs.response }}'
+          Copy-Item -Path '${{ steps.release-notes.outputs.response-file }}' `
+                    -Destination 'publish/release-notes.md' -Force
 
       - name: Build NuGet package
         run: >
