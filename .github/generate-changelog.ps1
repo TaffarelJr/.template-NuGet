@@ -378,10 +378,9 @@ function ConvertTo-YamlSafeText {
     # Remove shield badges (they cause YAML issues)
     $content = $content -replace '!\[[^\]]*\]\([^)]*\)\s*', ''
 
-    # Clean up extra spaces, and ensure proper line endings and indentation
-    $content = $content -replace '\s+$', '' -split "`r?`n" `
-    | ForEach-Object { "      $($_.Trim())" } `
-    | Join-String -Separator "`n"
+    # Clean up extra spaces and ensure proper line endings
+    $lines = $content -split "`r?`n" | ForEach-Object { $_.TrimEnd() }
+    $content = $lines -join "`n"
 
     Set-Content -Path $safePath -Value $content -Encoding UTF8
 }
