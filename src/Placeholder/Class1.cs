@@ -1,4 +1,4 @@
-namespace Fake
+namespace Placeholder
 {
     /// <summary>
     /// Represents a class with no specific functionality.
@@ -28,6 +28,17 @@ namespace Fake
         public static int Add(int a, int b)
         {
             return a + b;
+        }
+
+        /// <summary>
+        /// Subtracts the second integer from the first and returns the result.
+        /// </summary>
+        /// <param name="a">The first integer.</param>
+        /// <param name="b">The second integer.</param>
+        /// <returns>The difference between the two integers.</returns>
+        public static int Subtract(int a, int b)
+        {
+            return a - b;
         }
     }
 }

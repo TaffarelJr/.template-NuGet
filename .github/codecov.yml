@@ -54,9 +54,9 @@ flag_management:
 
 component_management:
   individual_components:
-    - component_id: fake # Identifier that must never change
-      name: Fake         # Display name that can be changed freely
-      paths: [src/Fake/**]
+    - component_id: placeholder # Identifier that must never change
+      name: Placeholder         # Display name that can be changed freely
+      paths: [src/Placeholder/**]
 
 #───────────────────────────────────────────────────────────────────────────────
 # Pull request comment settings

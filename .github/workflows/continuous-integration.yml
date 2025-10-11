@@ -1,41 +1,42 @@
 name: Continuous Integration
 
 on:
-  push:
-    branches: [main]
-
   # Triggered on pull requests
   pull_request:
     branches: [main]
 
+  # Can be called by other workflows
+  workflow_call:
+    outputs:
+      version:
+        description: "The version number of the package that was built"
+        value: ${{ jobs.build-test-pack.outputs.version }}
+
   # Can be triggered manually
   workflow_dispatch:
-# inputs:
-#   publish:
-#     description: "Publish NuGet package"
-#     type: boolean
-#     default: false
 
 jobs:
-  build-and-test:
+  build-test-pack:
     name: Build and Test
     runs-on: windows-latest # Needed to support .NET Framework
-    timeout-minutes: 15
+
     defaults:
       run:
         shell: pwsh
-    #     outputs:
-    #       version: ${{ steps.version.outputs.semVer }}
 
-    # https://docs.github.com/en/actions/using-jobs/assigning-permissions-to-jobs
+    outputs:
+      version: ${{ steps.version.outputs.semVer }}
+
     permissions:
-      contents: write # Needed for Dependabot to push changes
-      pull-requests: write # Needed for Codecov to report test coverage
+      contents: write
+      pull-requests: write
+      models: read
 
     env:
       DEPENDABOT_USERNAME: dependabot[bot]
       DEPENDABOT_EMAIL: 49699333+dependabot[bot]@users.noreply.github.com
       DEPENDABOT_AUTHOR: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+
     steps:
       #─────────────────────────────────────────────────────────────────────────
       # Prepare Environment
@@ -96,7 +97,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v6
         with:
           commit_message: ${{ steps.last-commit.outputs.message }}
-          file_pattern: src\*\packages.lock.json
+          file_pattern: src/*/packages.lock.json
           commit_options: --amend --no-edit
           push_options: --force
           commit_author: ${{ env.DEPENDABOT_AUTHOR }}
@@ -130,32 +131,55 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: |
-          Import-Module '.\test\TestHelpers.psm1' -Force
-          $null = Get-TestProjects | Get-TestRuns | Write-TestHeader `
-          | Invoke-DotnetTest | Publish-TestCoverage | Publish-TestResults
+          Import-Module './test/TestHelpers.psm1' -Force
+          $null = Get-TestProjects `
+                | Get-TestRuns `
+                | Write-TestHeader `
+                | Invoke-DotnetTest `
+                | Publish-TestCoverage `
+                | Publish-TestResults
 
       #─────────────────────────────────────────────────────────────────────────
       # Build NuGet Package
       #─────────────────────────────────────────────────────────────────────────
 
-#       - name: Build NuGet package
-#         run: >
-#           dotnet pack
-#           --nologo
-#           --no-restore
-#           --no-build
-#           --configuration Release
-#           -p:RepositoryBranch=${{ github.ref_name }}
-#           -p:PackageProjectUrl='${{ github.server_url }}/${{ github.repository }}'
-#           -p:PackageReleaseNotes='${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ steps.version.outputs.semVer }}'
+      - name: Generate changelog
+        run: .github/generate-changelog.ps1 -OutputPath publish/changelog.md
 
-#       - name: Upload NuGet package artifacts
-#         uses: actions/upload-artifact@v4
-#         with:
-#           name: nuget-packages
-#           path: src/**/*.nupkg
-#           retention-days: 7
+      - name: Extract release notes
+        id: release-notes
+        uses: actions/ai-inference@v2
+        with:
+          prompt-file: .github/generate-release-notes.prompt.yml
+          file_input: |
+            changelog: publish/changelog.safe.txt
 
+      - name: Save release notes
+        run: |
+          Remove-Item -Path 'publish/changelog.safe.txt' -Force
+          New-Item -Path 'publish/release-notes.md' -ItemType File -Force | Out-Null
+          Set-Content -Path 'publish/release-notes.md' -Value '${{ steps.release-notes.outputs.response }}'
+
+      - name: Build NuGet package
+        run: >
+          dotnet pack
+          --nologo
+          --no-restore
+          --no-build
+          --configuration Release
+          --output publish
+          -p:Version=${{ steps.version.outputs.semVer }}
+          -p:PackageVersion=${{ steps.version.outputs.semVer }}
+          -p:RepositoryBranch=${{ github.ref_name }}
+          -p:PackageProjectUrl='${{ github.server_url }}/${{ github.repository }}'
+          -p:PackageReleaseNotes='${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ steps.version.outputs.semVer }}'
+
+      - name: Upload NuGet package
+        uses: actions/upload-artifact@v4
+        with:
+          name: package
+          path: publish
+          retention-days: 7
 #   publish:
 #     name: Publish NuGet Package
 #     needs: build-and-test
