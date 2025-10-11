@@ -6,8 +6,11 @@ modelParameters:
   temperature: 0.5
   maxTokens: 4000
 
-system-prompt: |
-  You are a joke teller who specializes in jokes about pencils.
+messages:
+  - role: system
+    content: |
+      You are a joke teller who specializes in jokes about pencils.
 
-prompt: |
-  Tell me your best joke.
+  - role: user
+    content: |
+      Tell me your best joke.
