@@ -356,20 +356,34 @@ function Write-CategoryToChangeLog {
 function ConvertTo-YamlSafeText {
     param(
         [Parameter(Mandatory)]
-        [string]$MarkdownPath,
-
-        [Parameter(Mandatory)]
-        [string]$SafePath
+        [string]$MarkdownPath
     )
 
-    if (Test-Path $SafePath) { Remove-Item $SafePath -Force }
-    New-Item -Path $SafePath -ItemType File -Force | Out-Null
+    $safePath = [System.IO.Path]::ChangeExtension($MarkdownPath, 'safe.txt')
+    if (Test-Path $safePath) { Remove-Item $safePath -Force }
+    New-Item -Path $safePath -ItemType File -Force | Out-Null
 
     $content = Get-Content -Path $MarkdownPath -Raw
-    $content = $content -replace '^(\s*)-', '  •'  # Replace markdown list markers with bullets
-    $content = $content -replace '^(\s*)##', '  **'  # Replace markdown headers
-    $content = $content -replace '`', "'"  # Replace backticks with single quotes
-    Set-Content -Path $SafePath -Value $content -Encoding UTF8
+
+    # Replace markdown list markers with bullets (using multiline mode)
+    $content = $content -replace '(?m)^(\s*)-', '$1•'
+
+    # Replace markdown headers with bold text (using multiline mode)
+    $content = $content -replace '(?m)^(\s*)##\s*', '$1**'
+    $content = $content -replace '(?m)^(\s*)#\s*', '$1**'
+
+    # Replace backticks with single quotes
+    $content = $content -replace '`', "'"
+
+    # Remove shield badges (they cause YAML issues)
+    $content = $content -replace '!\[[^\]]*\]\([^)]*\)\s*', ''
+
+    # Clean up extra spaces, and ensure proper line endings and indentation
+    $content = $content -replace '\s+$', '' -split "`r?`n" `
+    | ForEach-Object { "      $($_.Trim())" } `
+    | Join-String -Separator "`n"
+
+    Set-Content -Path $safePath -Value $content -Encoding UTF8
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -413,5 +427,5 @@ if ($mergeCommits -and $mergeCommits.Count -gt 0) {
     Write-CategoryToChangeLog $mergeCategory $mergeCommits
 }
 
-ConvertTo-YamlSafeText -MarkdownPath $OutputPath -SafePath 'changelog.safe.txt'
+ConvertTo-YamlSafeText -MarkdownPath $OutputPath
 Write-Host "Changelog generated successfully: $OutputPath"
