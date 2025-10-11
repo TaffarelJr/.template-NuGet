@@ -148,11 +148,14 @@ jobs:
 
       - name: Extract release notes
         id: release-notes
+        continue-on-error: true # Workaround for Windows runner cleanup bug in v2
         uses: actions/ai-inference@v2
         with:
-          prompt-file: .github/generate-release-notes.prompt.yml
           model: openai/gpt-4o-mini
           max-tokens: 4000
+          prompt-file: .github/generate-release-notes.prompt.yml
+          input: |
+            changelog: I refactored some code to use async methods
 
       - name: Save release notes
         run: |
