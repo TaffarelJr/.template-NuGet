@@ -365,24 +365,20 @@ function ConvertTo-YamlSafeText {
 
     $content = Get-Content -Path $MarkdownPath -Raw
 
-    # Replace markdown list markers with bullets (using multiline mode)
-    $content = $content -replace '(?m)^(\s*)-', '$1•'
+    # Remove Markdown header syntax (using multiline mode)
+    $content = $content -replace '(?m)^#+\s*', ''
 
-    # Replace markdown headers with bold text (using multiline mode)
-    $content = $content -replace '(?m)^(\s*)##\s*', '$1**'
-    $content = $content -replace '(?m)^(\s*)#\s*', '$1**'
+    # Replace Markdown list syntax with actual bullets (using multiline mode)
+    $content = $content -replace '(?m)^(\s*)- ', '$1• '
 
-    # Replace backticks with single quotes
-    $content = $content -replace '`', "'"
+    # Remove hyperlinks, but preserve their text
+    $content = $content -replace '!(\[[^\]]*\])\([^)]*\)', '$1'
 
-    # Remove shield badges (they cause YAML issues)
-    $content = $content -replace '!\[[^\]]*\]\([^)]*\)\s*', ''
+    # Clean up extra space, and ensure proper line endings and indentation
+    $lines = $content -split "`r?`n" `
+    | ForEach-Object { "      $($_.TrimEnd())" }
 
-    # Clean up extra spaces and ensure proper line endings
-    $lines = $content -split "`r?`n" | ForEach-Object { $_.TrimEnd() }
-    $content = $lines -join "`n"
-
-    Set-Content -Path $safePath -Value $content -Encoding UTF8
+    Set-Content -Path $safePath -Value $($lines -join "`n") -Encoding UTF8
 }
 
 #───────────────────────────────────────────────────────────────────────────────
