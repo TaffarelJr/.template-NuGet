@@ -140,7 +140,7 @@ jobs:
                 | Publish-TestResults
 
       #─────────────────────────────────────────────────────────────────────────
-      # Build NuGet Package
+      # Generate Release Notes
       #─────────────────────────────────────────────────────────────────────────
 
       - name: Generate changelog
@@ -154,8 +154,8 @@ jobs:
           model: openai/gpt-4o-mini
           max-tokens: 4000
           prompt-file: .github/generate-release-notes.prompt.yml
-          input: |
-            changelog: I refactored some code to use async methods
+          file_input: |
+            changelog: publish/changelog.safe.txt
 
       - name: Save release notes
         run: |
@@ -163,6 +163,10 @@ jobs:
           Set-Content -Path 'publish/release-notes.md' -Value @'
           ${{ steps.release-notes.outputs.response }}
           '@
+
+      #─────────────────────────────────────────────────────────────────────────
+      # Build NuGet Package
+      #─────────────────────────────────────────────────────────────────────────
 
       - name: Build NuGet package
         run: >
