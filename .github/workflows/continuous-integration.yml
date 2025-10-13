@@ -159,7 +159,7 @@ jobs:
 
       - name: Save release notes
         run: |
-          Remove-Item -Path 'publish/changelog.safe.txt' -Force -ErrorAction SilentlyContinue
+          Remove-Item -Path 'publish/changelog.safe.txt' -Force
           Set-Content -Path 'publish/release-notes.md' -Value @'
           ${{ steps.release-notes.outputs.response }}
           '@

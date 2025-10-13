@@ -208,7 +208,9 @@ function ConvertTo-ParsedCommit {
     )
 
     process {
-        $isMergeCommit = $Commit.Subject.StartsWith('Merge pull request #')
+        $isMergeCommit = $Commit.Subject.StartsWith('Merge pull request #') `
+            -or $Commit.Subject -imatch '^Merge [a-z0-9]{40} into [a-z0-9]{40}$'
+
         $hasBreakingChange = $Commit.Body -imatch 'breaking\s*(?:changes?)?\s*:'
         $isConventional = $Commit.Subject -imatch '^\s*([a-z]+)\s*(\([^)]*\))?\s*(!)?:\s*(.+?)\s*$'
         $hasBang = $isConventional -and ($Matches[3] -eq '!')
@@ -422,5 +424,5 @@ if ($mergeCommits -and $mergeCommits.Count -gt 0) {
     Write-CategoryToChangeLog $mergeCategory $mergeCommits
 }
 
-ConvertTo-YamlSafeText -MarkdownPath $OutputPath
 Write-Host "Changelog generated successfully: $OutputPath"
+ConvertTo-YamlSafeText -MarkdownPath $OutputPath
