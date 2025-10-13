@@ -164,6 +164,14 @@ jobs:
           ${{ steps.release-notes.outputs.response }}
           '@
 
+      - name: test GitReleaseManager
+        run: |
+          dotnet-gitreleasemanager export
+          -o ${{ github.repository_owner }}
+          -r ${{ github.event.repository.name }}
+          --token ${{ secrets.GITHUB_TOKEN }}
+          -f publish/GENERATED-CHANGELOG.md
+
       #─────────────────────────────────────────────────────────────────────────
       # Build NuGet Package
       #─────────────────────────────────────────────────────────────────────────
@@ -188,32 +196,6 @@ jobs:
           name: package
           path: publish
           retention-days: 7
-#   publish:
-#     name: Publish NuGet Package
-#     needs: build-and-test
-#     if: ${{ github.event_name == 'workflow_dispatch' && inputs.publish || github.event_name == 'push' && github.ref == 'refs/heads/main' && contains(github.event.head_commit.message, '[release]') }}
-#     runs-on: windows-latest
-#     defaults:
-#       run:
-#         shell: pwsh
-#     permissions:
-#       contents: write
-#       packages: write
-#     steps:
-#       - name: Checkout repo for release notes
-#         uses: actions/checkout@v4
-#         with:
-#           fetch-depth: 0
-
-#       - name: Download NuGet packages
-#         uses: actions/download-artifact@v4
-#         with:
-#           name: nuget-packages
-#           path: nuget-packages
-
-#       - name: Setup .NET
-#         uses: actions/setup-dotnet@v5
-
 #       - name: Generate release notes
 #         id: release-notes
 #         run: |
