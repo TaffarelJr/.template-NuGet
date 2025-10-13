@@ -165,7 +165,7 @@ jobs:
           '@
 
       - name: test GitReleaseManager
-        run: |
+        run: >
           dotnet-gitreleasemanager export
           -o ${{ github.repository_owner }}
           -r ${{ github.event.repository.name }}
