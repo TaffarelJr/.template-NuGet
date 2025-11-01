@@ -94,7 +94,7 @@ jobs:
 
       - name: (Dependabot) Commit lock file changes
         if: ${{ github.actor == env.DEPENDABOT_USERNAME }}
-        uses: stefanzweifel/git-auto-commit-action@v6
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: ${{ steps.last-commit.outputs.message }}
           file_pattern: src/*/packages.lock.json
