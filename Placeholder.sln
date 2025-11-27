@@ -29,6 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\continuous-integration.yml = .github\workflows\continuous-integration.yml
 		.github\workflows\create-release.yml = .github\workflows\create-release.yml
+		.github\workflows\publish-packages.yml = .github\workflows\publish-packages.yml
 		.github\workflows\template-sync.yml = .github\workflows\template-sync.yml
 		.github\workflows\validate-codecov.yml = .github\workflows\validate-codecov.yml
 	EndProjectSection
@@ -36,6 +37,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{B2228305-B55C-488C-899C-AF63F4FADA15}"
 	ProjectSection(SolutionItems) = preProject
 		docs\ConventionalCommits.md = docs\ConventionalCommits.md
+		docs\ReleaseProcess.md = docs\ReleaseProcess.md
 		docs\Styleguide.md = docs\Styleguide.md
 		docs\VerticalRulers.md = docs\VerticalRulers.md
 	EndProjectSection

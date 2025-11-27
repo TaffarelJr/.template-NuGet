@@ -2,6 +2,8 @@
 
 [![Continuous Integration](https://github.com/TaffarelJr/.template-NuGet/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/TaffarelJr/.template-NuGet/actions/workflows/continuous-integration.yml)
 [![Codecov](https://codecov.io/gh/TaffarelJr/.template-NuGet/graph/badge.svg)](https://codecov.io/gh/TaffarelJr/.template-NuGet)
+[![NuGet](https://img.shields.io/nuget/v/Placeholder.svg)](https://www.nuget.org/packages/Placeholder/)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/Placeholder.svg)](https://www.nuget.org/packages/Placeholder/)
 
 This is a template repo that contains the default configuration
 for building and publishing a single NuGet package.
@@ -124,6 +126,7 @@ because most files need repo-specific customization.
 | &nbsp;└─📁[workflows/][workflowFolder]                                             |                                                           |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─📄[Continuous Integration][ciWorkflow] | Builds, tests, and packs the solution.                    |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─📄[Create Release][releaseWorkflow]    | Creates draft Releases in GitHub                          |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─📄[Publish Packages][publishWorkflow]  | Publishes packages to GitHub Packages and NuGet.org       |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─📄[Template Sync][syncWorkflow]        | Synchronizes files from a template repo to a derived repo |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─📄[Validate Codecov][codecovWorkflow]  | Validates changes to [codecov.yml][codecovFile]           |
 
@@ -184,6 +187,7 @@ because most files need repo-specific customization.
 [workflowFolder]: ./.github/workflows/
 [ciWorkflow]: ./.github/workflows/continuous-integration.yml
 [releaseWorkflow]: ./.github/workflows/create-release.yml
+[publishWorkflow]: ./.github/workflows/publish-packages.yml
 [syncWorkflow]: ./.github/workflows/template-sync.yml
 [codecovWorkflow]: ./.github/workflows/validate-codecov.yml
 [codecovFile]: ./.github/codecov.yml

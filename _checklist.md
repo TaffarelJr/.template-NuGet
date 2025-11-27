@@ -48,6 +48,10 @@ The following must be configured manually:
     - Go to `Actions`
       - Add a repo secret called `CODECOV_TOKEN`
         (get the value from [Codecov][codecovToken])
+      - Add a repo secret called `NUGET_API_KEY`
+        (create a new API key on [NuGet.org][nugetApiKey],
+        scoped only for this specific repo,
+        and use its value)
 
 ## 3. Clone the new repo
 
@@ -171,6 +175,7 @@ Only a few need to be overridden in the new repo.
 - Find all instances of `Placeholder` in the new repo
   - Replace with `<NuGet package name>` in **ONLY** these files:
     - [Placeholder.sln][solutionFile]
+    - [README.md][readmeFile] (badges)
     - [codecov.yml][codecovFile]
     - Project files under [src/][srcFolder]
     - Project files under [test/][testFolder]
@@ -252,3 +257,4 @@ and without creating a Pull Request.
 <!-- Public URIs (alphabetical by name) -->
 
 [codecovToken]: https://app.codecov.io/account/gh/TaffarelJr/org-upload-token
+[nugetApiKey]: https://www.nuget.org/account/apikeys
