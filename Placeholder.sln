@@ -28,6 +28,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{C7A64F19-DF59-4B16-A9C9-5D317FCF26CD}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\continuous-integration.yml = .github\workflows\continuous-integration.yml
+		.github\workflows\create-release.yml = .github\workflows\create-release.yml
 		.github\workflows\template-sync.yml = .github\workflows\template-sync.yml
 		.github\workflows\validate-codecov.yml = .github\workflows\validate-codecov.yml
 	EndProjectSection
@@ -51,6 +52,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		CODE_OF_CONDUCT.md = CODE_OF_CONDUCT.md
 		Common.props = Common.props
 		CONTRIBUTING.md = CONTRIBUTING.md
+		GenerateChangelog.ps1 = GenerateChangelog.ps1
 		GitVersion.yml = GitVersion.yml
 		global.json = global.json
 		Icon.png = Icon.png

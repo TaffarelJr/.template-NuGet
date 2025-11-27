@@ -123,6 +123,7 @@ because most files need repo-specific customization.
 | 📁[.github/][githubFolder]                                                         |                                                           |
 | &nbsp;└─📁[workflows/][workflowFolder]                                             |                                                           |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─📄[Continuous Integration][ciWorkflow] | Builds, tests, and packs the solution.                    |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─📄[Create Release][releaseWorkflow]    | Creates draft Releases in GitHub                          |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─📄[Template Sync][syncWorkflow]        | Synchronizes files from a template repo to a derived repo |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─📄[Validate Codecov][codecovWorkflow]  | Validates changes to [codecov.yml][codecovFile]           |
 
@@ -173,6 +174,7 @@ because most files need repo-specific customization.
 | 📄[.gitattributes][gitAttributesFile]        | Built using [scaffolding][ghGitAttributes]              |
 | 📄[.gitignore][gitIgnoreFile]                | Built using [scaffolding][ghGitIgnore]                  |
 | 📄[.gitmessage][gitMessageFile]              | [Commit message template][styleguideFile-commit]        |
+| 📄[GenerateChangelog.ps1][changelogFile]     | Script for generating the release changelog             |
 | 📄[GitVersion.yml][gitVersionFile]           | [GitVersion configuration][gitVersion]                  |
 
 <!-- Source Code URIs (alphabetical by file hierarchy) -->
@@ -181,6 +183,7 @@ because most files need repo-specific customization.
 [issueFormsFolder]: ./.github/ISSUE_TEMPLATE/
 [workflowFolder]: ./.github/workflows/
 [ciWorkflow]: ./.github/workflows/continuous-integration.yml
+[releaseWorkflow]: ./.github/workflows/create-release.yml
 [syncWorkflow]: ./.github/workflows/template-sync.yml
 [codecovWorkflow]: ./.github/workflows/validate-codecov.yml
 [codecovFile]: ./.github/codecov.yml
@@ -212,6 +215,7 @@ because most files need repo-specific customization.
 [cocFile]: ./CODE_OF_CONDUCT.md
 [commonPropsFile]: ./Common.props
 [contribFile]: ./CONTRIBUTING.md
+[changelogFile]: ./GenerateChangelog.ps1
 [gitVersionFile]: ./GitVersion.yml
 [globalJsonFile]: ./global.json
 [iconFile]: ./Icon.png
