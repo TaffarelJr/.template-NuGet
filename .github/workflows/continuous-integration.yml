@@ -1,0 +1,208 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: Continuous Integration
+
+on:
+  # Triggered on pull requests
+  pull_request:
+    branches: [main]
+    # These files don't affect continuous integration checks
+    paths-ignore:
+      - ".github/ISSUE_TEMPLATE/**"
+      - ".github/workflows/create-release.yml"
+      - ".github/workflows/publish-candidate.yml"
+      - ".github/workflows/publish-release.yml"
+      - ".github/workflows/template-sync.yml"
+      - ".github/workflows/validate-codecov.yml"
+      - ".github/CODEOWNERS"
+      - ".github/dependabot.yml"
+      - ".github/settings.yml"
+      - "**/*.editorconfig"
+      - "**/*.ico"
+      - "**/*.jpg"
+      - "**/*.md"
+      - "**/*.png"
+      - "**/*.ps1"
+      - "**/*.puml"
+      - "**/*.sh"
+      - "**/*.svg"
+      - "**/.git*"
+      - "LICENSE"
+
+  # Can be called by other workflows
+  workflow_call:
+    outputs:
+      version:
+        description: "The version number of the package that was built"
+        value: ${{ jobs.build-test-pack.outputs.version }}
+
+  # Can be triggered manually
+  workflow_dispatch:
+
+# Cancel any in-progress runs on the same branch when a new run is triggered
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build-test-pack:
+    name: Build, Test, and Pack
+    runs-on: windows-latest # Needed to support .NET Framework
+
+    defaults:
+      run:
+        shell: pwsh
+
+    outputs:
+      version: ${{ steps.version.outputs.semVer }}
+
+    permissions:
+      contents: write # Needed to push changes (Dependabot)
+      pull-requests: write # Needed to create PRs (Dependabot)
+
+    env:
+      DEPENDABOT_USERNAME: dependabot[bot]
+      DEPENDABOT_EMAIL: 49699333+dependabot[bot]@users.noreply.github.com
+      DEPENDABOT_AUTHOR: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+
+    steps:
+      #─────────────────────────────────────────────────────────────────────────
+      # Prepare Environment
+      #─────────────────────────────────────────────────────────────────────────
+
+      - name: Checkout repo
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0 # Needed to generate version number
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          cache: true # Cache NuGet packages
+          cache-dependency-path: |
+            **/*.csproj
+            **/packages.lock.json
+          global-json-file: global.json
+          dotnet-version: |
+            3.1.x
+            5.0.x
+            6.0.x
+            7.0.x
+            8.0.x
+            9.0.x
+            10.0.x
+
+      - name: Setup GitVersion
+        uses: gittools/actions/gitversion/setup@v4
+        with:
+          versionSpec: 6.x
+
+      - name: Setup additional tools
+        run: |
+          git config --unset-all extensions.worktreeconfig || true
+          pip install codecov-cli
+
+      #─────────────────────────────────────────────────────────────────────────
+      # Restore Dependencies
+      #─────────────────────────────────────────────────────────────────────────
+
+      - name: Restore dependencies
+        run: |
+          dotnet tool restore
+          if ('${{ github.actor }}' -eq '${{ env.DEPENDABOT_USERNAME }}') {
+            dotnet restore --nologo --force-evaluate
+          } else {
+            dotnet restore --nologo
+          }
+
+      - name: (Dependabot) Prepare to commit lock file changes
+        if: ${{ github.actor == env.DEPENDABOT_USERNAME }}
+        id: last-commit
+        run: |
+          git config --local user.name '${{ env.DEPENDABOT_USERNAME }}'
+          git config --local user.email '${{ env.DEPENDABOT_EMAIL }}'
+          "message=$(git log -1 --pretty=%B)" >> $Env:GITHUB_OUTPUT
+
+      - name: (Dependabot) Commit lock file changes
+        if: ${{ github.actor == env.DEPENDABOT_USERNAME }}
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: ${{ steps.last-commit.outputs.message }}
+          file_pattern: src/*/packages.lock.json
+          commit_options: --amend --no-edit
+          push_options: --force
+          commit_author: ${{ env.DEPENDABOT_AUTHOR }}
+          commit_user_name: ${{ env.DEPENDABOT_USERNAME }}
+          commit_user_email: ${{ env.DEPENDABOT_EMAIL }}
+
+      #─────────────────────────────────────────────────────────────────────────
+      # Build Code
+      #─────────────────────────────────────────────────────────────────────────
+
+      - name: Determine version
+        id: version
+        uses: gittools/actions/gitversion/execute@v4
+
+      - name: Build code
+        run: >
+          dotnet build
+          --nologo
+          --no-restore
+          --configuration Release
+          -p:Version=${{ steps.version.outputs.semVer }}
+          -p:AssemblyVersion=${{ steps.version.outputs.assemblySemVer }}
+          -p:FileVersion=${{ steps.version.outputs.assemblySemFileVer }}
+          -p:InformationalVersion=${{ steps.version.outputs.informationalVersion }}
+
+      #─────────────────────────────────────────────────────────────────────────
+      # Run Tests
+      #─────────────────────────────────────────────────────────────────────────
+
+      - name: Run tests
+        id: run-tests
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        run: |
+          Import-Module './test/TestHelpers.psm1' -Force
+          $null = Get-TestProjects `
+                | Get-TestRuns `
+                | Write-TestHeader `
+                | Invoke-DotnetTest `
+                | Publish-TestCoverage `
+                | Publish-TestResults
+
+      - name: Collect test results
+        if: always() && steps.run-tests.conclusion != 'skipped'
+        run: |
+          New-Item -Path 'publish/TestResults' -ItemType Directory
+          Get-ChildItem -Path 'test' -Recurse -Directory -Filter 'TestResults' `
+          | ForEach-Object {
+            $targetDir = Join-Path 'publish/TestResults' $_.Parent.Name
+            Copy-Item -Path (Join-Path $_.FullName '*') -Destination $targetDir -Recurse
+          }
+
+      #─────────────────────────────────────────────────────────────────────────
+      # Build NuGet Package
+      #─────────────────────────────────────────────────────────────────────────
+
+      - name: Build NuGet package
+        run: >
+          dotnet pack
+          --nologo
+          --no-restore
+          --no-build
+          --configuration Release
+          --output publish
+          -p:Version=${{ steps.version.outputs.semVer }}
+          -p:PackageVersion=${{ steps.version.outputs.semVer }}
+          -p:RepositoryBranch=${{ github.ref_name }}
+          -p:PackageProjectUrl='${{ github.server_url }}/${{ github.repository }}'
+          -p:PackageReleaseNotes='${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ steps.version.outputs.semVer }}'
+
+      - name: Upload Artifacts
+        if: always() && steps.run-tests.conclusion != 'skipped'
+        uses: actions/upload-artifact@v6
+        with:
+          name: publish
+          path: publish
+          retention-days: 7

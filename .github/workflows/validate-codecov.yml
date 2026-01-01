@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: Validate Codecov
+
+on:
+  # Triggered on pull requests
+  pull_request:
+    paths:
+      - .github/codecov.yml
+
+  # Can be triggered manually
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Validate `codecov.yml`
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+      - name: Validate codecov.yml
+        run: |
+          OUTPUT=$(curl -f -s --data-binary @.github/codecov.yml https://codecov.io/validate)
+          STATUS=$?
+
+          echo "$OUTPUT"
+          echo
+
+          if [ $STATUS -eq 0 ]; then
+            echo "✅ codecov.yml is valid"
+          else
+            echo "❌ codecov.yml is invalid"
+            exit 1
+          fi

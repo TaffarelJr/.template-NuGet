@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- ─────────────────────────────────────────────────────────────────────────
+  │ Settings
+  └───────────────────────────────────────────────────────────────────────── -->
+
+  <PropertyGroup Label="General Settings">
+    <TargetFrameworks>net462;net47;net471;net472;net48;net481;netcoreapp3.1;net5.0;net6.0;net7.0;net8.0;net9.0;net10.0</TargetFrameworks>
+    <RootNamespace>Placeholder</RootNamespace>
+  </PropertyGroup>
+
+  <!-- ─────────────────────────────────────────────────────────────────────────
+  │ Import shared settings
+  │
+  │ These settings might contain PropertyGroups and/or ItemGroups;
+  │ they must be imported here, so they can straddle both categories.
+  └───────────────────────────────────────────────────────────────────────── -->
+
+  <Import Project="$(MSBuildProjectDirectory)\..\Test.props" />
+
+  <!-- ─────────────────────────────────────────────────────────────────────────
+  │ Dependencies
+  └───────────────────────────────────────────────────────────────────────── -->
+
+  <ItemGroup Label="Code Under Test">
+    <ProjectReference Include="$(MSBuildProjectDirectory)\..\..\src\Placeholder\Placeholder.csproj" />
+  </ItemGroup>
+
+</Project>
