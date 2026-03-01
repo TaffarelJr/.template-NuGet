@@ -1,0 +1,64 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: Publish Packages
+
+on:
+  # Triggered when a GitHub Release is published
+  release:
+    types: [published]
+
+jobs:
+  publish-packages:
+    name: Publish Packages
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+
+    permissions:
+      packages: write # Needed to publish to GitHub Packages
+
+    steps:
+      #─────────────────────────────────────────────────────────────────────────
+      # Prepare Environment
+      #─────────────────────────────────────────────────────────────────────────
+
+      - name: Download release assets
+        run: >
+          gh release download ${{ github.event.release.tag_name }}
+          --pattern '*.*nupkg'
+          --dir packages
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+
+      #─────────────────────────────────────────────────────────────────────────
+      # Publish Packages
+      #─────────────────────────────────────────────────────────────────────────
+
+      - name: Publish to GitHub Packages
+        run: |
+          for package in packages/*.*nupkg; do
+            if [ -f "$package" ]; then
+              echo
+              echo "Publishing $(basename "$package") to GitHub Packages..."
+              dotnet nuget push "$package" \
+                --source 'https://nuget.pkg.github.com/TaffarelJr/index.json' \
+                --api-key '${{ secrets.GITHUB_TOKEN }}' \
+                --skip-duplicate
+            fi
+          done
+
+      - name: Publish to NuGet.org
+        run: |
+          for package in packages/*.*nupkg; do
+            if [ -f "$package" ]; then
+              echo
+              echo "Publishing $(basename "$package") to NuGet.org..."
+              dotnet nuget push "$package" \
+                --source 'https://api.nuget.org/v3/index.json' \
+                --api-key '${{ secrets.NUGET_API_KEY }}' \
+                --skip-duplicate
+            fi
+          done
