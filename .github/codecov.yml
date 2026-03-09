@@ -1,0 +1,71 @@
+#───────────────────────────────────────────────────────────────────────────────
+# General Codecov configuration
+# https://docs.codecov.com/docs/codecovyml-reference#codecov
+#───────────────────────────────────────────────────────────────────────────────
+
+codecov:
+  require_ci_to_pass: true
+  notify:
+    wait_for_ci: true
+    notify_error: true
+
+#───────────────────────────────────────────────────────────────────────────────
+# Coverage reporting and status checks
+# https://docs.codecov.com/docs/codecovyml-reference#coverage
+#───────────────────────────────────────────────────────────────────────────────
+
+coverage:
+  precision: 2
+  round: down
+  range: "90...95"
+  status:
+    # Overall coverage status for the entire project
+    project:
+      default:
+        target: auto
+        threshold: 1%
+        if_not_found: failure
+        if_ci_failed: error
+
+    # Coverage status for only the lines changed in the PR (the patch)
+    patch:
+      default:
+        target: 95%
+        threshold: 2%
+        if_ci_failed: error
+
+    # Per-change coverage status (each changed file or group of lines)
+    changes: false
+
+#───────────────────────────────────────────────────────────────────────────────
+# Settings for managing Codecov flags (one per report)
+# https://docs.codecov.com/docs/codecovyml-reference#flags
+#───────────────────────────────────────────────────────────────────────────────
+
+flag_management:
+  default_rules:
+    carryforward: true
+
+#───────────────────────────────────────────────────────────────────────────────
+# Settings for managing Codecov components (one per project)
+# https://docs.codecov.com/docs/codecovyml-reference#component_management
+#───────────────────────────────────────────────────────────────────────────────
+
+component_management:
+  individual_components:
+    - component_id: placeholder # Identifier that must never change
+      name: Placeholder # Display name that can be changed freely
+      paths: [src/Placeholder/**]
+
+#───────────────────────────────────────────────────────────────────────────────
+# Pull request comment settings
+# https://docs.codecov.com/docs/codecovyml-reference#comment
+#───────────────────────────────────────────────────────────────────────────────
+
+comment:
+  layout: header,flags,condensed_header # ,reach,diff,components,condensed_files,files,footer,condensed_footer
+  behavior: default
+  require_changes: false
+  require_base: false
+  require_head: false
+  hide_project_coverage: false
