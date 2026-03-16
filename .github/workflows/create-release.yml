@@ -1,0 +1,60 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: Create Release
+
+on:
+  # Can be triggered manually
+  workflow_dispatch:
+
+jobs:
+  build-test-pack:
+    name: Build, Test, and Pack
+    permissions:
+      contents: read
+    uses: ./.github/workflows/continuous-integration.yml
+    secrets: inherit
+
+  create-release:
+    name: Create Draft Release
+    needs: build-test-pack
+    runs-on: windows-latest # Needed to generate changelog
+
+    defaults:
+      run:
+        shell: pwsh
+
+    permissions:
+      contents: write # Needed to create GitHub Releases
+
+    steps:
+      #─────────────────────────────────────────────────────────────────────────
+      # Prepare Environment
+      #─────────────────────────────────────────────────────────────────────────
+
+      - name: Checkout repo
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0 # Needed to generate changelog
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v6
+        with:
+          name: publish
+          path: publish
+
+      #─────────────────────────────────────────────────────────────────────────
+      # Create GitHub Draft Release
+      #─────────────────────────────────────────────────────────────────────────
+
+      - name: Generate changelog
+        run: ./GenerateChangelog.ps1
+
+      - name: Create draft release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ needs.build-test-pack.outputs.version }}
+          name: v${{ needs.build-test-pack.outputs.version }}
+          draft: true
+          body_path: Changelog.md
+          files: publish/*.*nupkg
+          fail_on_unmatched_files: true
