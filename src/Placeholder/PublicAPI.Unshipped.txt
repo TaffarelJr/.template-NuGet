@@ -1,0 +1,4 @@
+Placeholder.Class1
+static Placeholder.Class1.Add(int a, int b) -> int
+static Placeholder.Class1.Multiply(int value) -> int
+static Placeholder.Class1.Subtract(int a, int b) -> int
