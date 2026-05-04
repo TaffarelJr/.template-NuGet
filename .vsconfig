@@ -1,0 +1,30 @@
+{
+  "version": "1.0",
+    "components": [
+      // Workloads often contain components we don't need.
+      // For this reason, specify individual components
+      // and just group by workload.
+
+      // Microsoft.VisualStudio.Workload.CoreEditor
+      // https://learn.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-community?view=vs-2022#visual-studio-core-editor-included-with-visual-studio-community-2022
+      "Microsoft.VisualStudio.Component.CoreEditor",
+
+      // Microsoft.VisualStudio.Workload.ManagedDesktop
+      // https://learn.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-community?view=vs-2022#net-desktop-development
+      "Microsoft.Component.MSBuild",
+      "Microsoft.NetCore.Component.DevelopmentTools",
+      "Microsoft.NetCore.Component.Runtime.8.0",
+      "Microsoft.NetCore.Component.Runtime.9.0",
+      "Microsoft.NetCore.Component.SDK",
+      "Microsoft.VisualStudio.Component.Debugger.JustInTime",
+      "Microsoft.VisualStudio.Component.DiagnosticTools",
+      "Microsoft.VisualStudio.Component.IntelliCode",
+      "Microsoft.VisualStudio.Component.NuGet",
+      "Microsoft.VisualStudio.Component.Roslyn.Compiler",
+      "Microsoft.VisualStudio.Component.Roslyn.LanguageServices",
+      "Microsoft.VisualStudio.Component.TextTemplating"
+    ],
+  "extensions": [
+    "https://marketplace.visualstudio.com/items?itemName=PaulHarrington.EditorGuidelines"
+  ]
+}
