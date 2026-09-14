@@ -32,9 +32,9 @@
 
   <ItemGroup Label="Test Platform" Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <!-- Use wildcard patch versions to reduce churn. Use latest (except pinned). -->
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.*" />
-    <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="18.0.*" />
-    <PackageReference Include="Microsoft.TestPlatform.TestHost" Version="18.0.*" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.10.*" />
+    <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="18.10.*" />
+    <PackageReference Include="Microsoft.TestPlatform.TestHost" Version="18.10.*" />
   </ItemGroup>
 
   <ItemGroup Label="Test Platform" Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
@@ -54,7 +54,7 @@
                                            Or '$(TargetFramework)' == 'net9.0'
                                            Or '$(TargetFramework)' == 'net10.0'">
     <!-- Use wildcard patch versions to reduce churn. Use latest (except pinned). -->
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.*" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.10.*" />
   </ItemGroup>
 
   <ItemGroup Label="Test Utilities">
