@@ -24,7 +24,7 @@
   <ItemGroup Label="Test Integration Tools">
     <!-- Use wildcard patch versions to reduce churn. Use latest (except pinned). -->
     <PackageReference PrivateAssets="all" Include="coverlet.collector" Version="6.0.*" />
-    <PackageReference PrivateAssets="all" Include="Moq.Analyzers" Version="0.3.*" />
+    <PackageReference PrivateAssets="all" Include="Moq.Analyzers" Version="0.4.*" />
     <PackageReference PrivateAssets="all" Include="xunit.analyzers" Version="1.25.*" />
     <PackageReference PrivateAssets="all" Include="xunit.runner.console" Version="2.9.*" />
     <PackageReference PrivateAssets="all" Include="xunit.runner.visualstudio" Version="[2.4.5]" /> <!-- Supports all .NET versions -->
